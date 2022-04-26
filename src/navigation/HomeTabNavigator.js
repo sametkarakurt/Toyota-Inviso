@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import HomeScreen from '../screens/Home/HomeScreen';
-import SettingsScreen from '../screens/Settings/Settings';
+import {HomeScreen} from '../screens/Home/HomeScreen';
 import FormScreen from '../screens/Form/FormScreen';
+import SettingsScreen from '../screens/Settings/Settings';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import LoginScreen from '../screens/Login/LoginScreen';
+
 const Tab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {

@@ -9,8 +9,9 @@ import Form from '../Form/FormScreen.js';
 import NetInfo from '@react-native-community/netinfo';
 import {useNetInfo} from '@react-native-community/netinfo';
 import InternetConnection from '../../components/InternetAlert/InternetConnection';
+import {AuthContext} from '../src/screens/utily';
 
-const HomeScreen = ({navigation}) => {
+export function HomeScreen(navigation) {
   const netInfo = useNetInfo();
   console.log(netInfo.isConnected);
   return (
@@ -36,6 +37,4 @@ const HomeScreen = ({navigation}) => {
       />
     </View>
   );
-};
-
-export default HomeScreen;
+}
