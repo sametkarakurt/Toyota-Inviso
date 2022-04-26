@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import styles from './styles';
-const FormScreen = ({route}) => {
+const OfflineScreen = ({route}) => {
   return (
     <View style={styles.container}>
-      <Text>Görevlerim</Text>
+      <Text>Çevrimdışı</Text>
     </View>
   );
 };
 
-export default FormScreen;
+export default OfflineScreen;
