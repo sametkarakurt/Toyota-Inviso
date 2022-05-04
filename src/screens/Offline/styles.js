@@ -1,12 +1,9 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#E8EAED',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
+  container: {padding: 16, paddingTop: 30},
+  head: {height: 40},
+  text: {margin: 6},
 });
 
 export default styles;

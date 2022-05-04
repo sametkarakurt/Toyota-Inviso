@@ -10,8 +10,7 @@ import {
   NativeBaseProvider,
   Input,
 } from 'native-base';
-const InputNumber = () => {
-  const [groupValue, setGroupValue] = React.useState(['Öğrenci', 'Çalışan']);
+const InputNumber = props => {
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -19,8 +18,7 @@ const InputNumber = () => {
           <HStack alignItems="baseline">
             <Heading fontSize="lg">Input Number</Heading>
           </HStack>
-
-          <Input />
+          <Input onChangeText={text => props.valueChange(text)} />
         </VStack>
       </Box>
     </NativeBaseProvider>

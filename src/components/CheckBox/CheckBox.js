@@ -9,8 +9,8 @@ import {
   Center,
   NativeBaseProvider,
 } from 'native-base';
-const CheckBox = () => {
-  const [groupValue, setGroupValue] = React.useState(['Öğrenci', 'Çalışan']);
+const CheckBox = props => {
+  const [groupValue, setGroupValue] = React.useState([]);
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -25,6 +25,7 @@ const CheckBox = () => {
             accessibilityLabel="pick an item"
             onChange={values => {
               setGroupValue(values || []);
+              props.valueChange(values);
             }}>
             <Checkbox value="ogrenci" my="1">
               Öğrenci
