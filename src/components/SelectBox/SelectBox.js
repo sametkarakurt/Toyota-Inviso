@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {Text, View} from 'react-native';
 import SelectBox from 'react-native-multi-selectbox';
+import {Context} from '../../store/context';
 import {xorBy} from 'lodash';
 import {
   TextArea,
@@ -11,31 +12,22 @@ import {
   HStack,
   Heading,
 } from 'native-base';
-const K_OPTIONS = [
-  {
-    item: 'Female',
-    id: 'female',
-  },
-  {
-    item: 'Male',
-    id: 'male',
-  },
-];
+
 const SelectBoxComponent = props => {
-  const [selectedTeam, setSelectedTeam] = useState({});
+  const [selected, setSelected] = useState({});
 
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
         <VStack space={2}>
           <HStack alignItems="baseline">
-            <Heading fontSize="lg">Select</Heading>
+            <Heading fontSize="lg">{props.title}</Heading>
           </HStack>
           <SelectBox
-            options={K_OPTIONS}
-            value={selectedTeam}
+            options={props.data}
+            value={selected}
             onChange={val => {
-              setSelectedTeam(val);
+              setSelected(val);
               props.valueChange(val.id);
             }}
             arrowIconColor={'black'}

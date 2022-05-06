@@ -64,6 +64,16 @@ const FormScreen = ({route}) => {
   const radioButtonChange = text => {
     setFormData({...formData, radioButton: text});
   };
+  const K_OPTIONS = [
+    {
+      item: 'Female',
+      id: 'female',
+    },
+    {
+      item: 'Male',
+      id: 'male',
+    },
+  ];
 
   return (
     <NativeBaseProvider>
@@ -79,7 +89,11 @@ const FormScreen = ({route}) => {
             <InputNumber valueChange={numberInputChange} />
             <InputEmail valueChange={emailInputChange} />
             <MultiSelect valueChange={multiSelectChange} />
-            <SelectBox valueChange={selectChange} />
+            <SelectBox
+              valueChange={selectChange}
+              data={K_OPTIONS}
+              title={'Select'}
+            />
             <TextAreaComponent valueChange={textAreaInputChange} />
             <CheckBox valueChange={checkBoxChange} />
             <RadioButtonComponent valueChange={radioButtonChange} />

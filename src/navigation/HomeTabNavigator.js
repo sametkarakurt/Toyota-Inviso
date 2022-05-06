@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {HomeScreen} from '../screens/Home/HomeScreen';
-import FormScreen from '../screens/Form/FormScreen';
+import FormScreen from '../screens/Görevlerim/GörevlerimScreen';
 import SettingsScreen from '../screens/Settings/Settings';
 import OfflineScreen from '../screens/Offline/OfflineScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Görevlerim from '../screens/Görevlerim/GörevlerimScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -14,7 +15,7 @@ const HomeTabNavigator = () => {
   return (
     <Tab.Navigator barStyle={{backgroundColor: 'black'}}>
       <Tab.Screen
-        name={'Formlar'}
+        name={'Home'}
         component={HomeScreen}
         options={{
           tabBarIcon: ({color}) => (
@@ -28,7 +29,7 @@ const HomeTabNavigator = () => {
       />
       <Tab.Screen
         name={'Görevlerim'}
-        component={FormScreen}
+        component={Görevlerim}
         options={{
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons
