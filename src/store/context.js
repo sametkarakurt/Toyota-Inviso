@@ -1,5 +1,6 @@
 import React, {createContext, useState} from 'react';
 import DeviceInfo from 'react-native-device-info';
+import {useTranslation} from 'react-i18next';
 export const Context = createContext({
   offlineMod: false,
   deviceID: '',
@@ -8,6 +9,7 @@ export const Context = createContext({
 });
 
 function ContextProvider({children}) {
+  const {i18n} = useTranslation();
   var expression = /[^-]/g;
   var uniqueId = DeviceInfo.getUniqueId();
   var exp = uniqueId.match(expression);
@@ -30,6 +32,7 @@ function ContextProvider({children}) {
 
   function changeLanguage(language) {
     setLanguage(language);
+    i18n.changeLanguage(language)
   }
 
   const value = {

@@ -1,0 +1,18 @@
+{
+    "translation":{
+        //Login Page
+        "username":"Kullanıcı Adı",
+        "password":"Şifre",
+        "login": "Giriş",
+        //Navigator
+        "homePage":"Anasayfa",
+        "missions":"Görevler",
+        "offlinePage":"Çevrimdışı",
+         //Settings Page
+        "settings":"Ayarlar",
+        "offlineMode":"Çevrimdışı Mod",
+        "language":"Dil",
+        "appSettings":"Resim ve Uygulama Ayarları",
+        "uuid":"Cihaz UUID"
+    }
+}

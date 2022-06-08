@@ -5,7 +5,7 @@ import {useNetInfo} from '@react-native-community/netinfo';
 import {Context} from '../../store/context';
 import InternetConnection from '../../components/InternetAlert/InternetConnection';
 import {Box, NativeBaseProvider} from 'native-base';
-const Görevlerim = ({route}) => {
+const MissionsScreen = ({route}) => {
   const context = useContext(Context);
   const netInfo = useNetInfo();
   return (
@@ -23,4 +23,4 @@ const Görevlerim = ({route}) => {
   );
 };
 
-export default Görevlerim;
+export default MissionsScreen;
