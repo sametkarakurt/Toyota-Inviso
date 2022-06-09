@@ -13,6 +13,7 @@ import SubmitButons from '../SubmitButons/SubmitButons';
 import InputEmail from '../InputEmail/InputEmail';
 import InputNumber from '../InputNumber/InputNumber';
 import uuid from 'react-native-uuid';
+import ScanScreen from '../Scanner/Scanner';
 const FormScreen = ({route}) => {
   const {id, formName} = route.params;
   const {loading, error, data} = useFetch(`${Config.API_URL}/${id}`);
@@ -97,6 +98,7 @@ const FormScreen = ({route}) => {
             <TextAreaComponent valueChange={textAreaInputChange} />
             <CheckBox valueChange={checkBoxChange} />
             <RadioButtonComponent valueChange={radioButtonChange} />
+            <ScanScreen />
             <SubmitButons data={formData} />
           </ScrollView>
         </Center>

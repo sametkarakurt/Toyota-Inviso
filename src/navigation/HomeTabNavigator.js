@@ -1,21 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import {HomeScreen} from '../screens/Home/HomeScreen';
-import FormScreen from '../screens/Görevlerim/GörevlerimScreen';
 import SettingsScreen from '../screens/Settings/Settings';
+import MissionsScreen from '../screens/Missions/MissionsScreen'
 import OfflineScreen from '../screens/Offline/OfflineScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Görevlerim from '../screens/Görevlerim/GörevlerimScreen';
-
+import { useTranslation } from 'react-i18next';
 const Tab = createMaterialBottomTabNavigator();
 
 const HomeTabNavigator = () => {
+  const {t, i18n} = useTranslation();
   return (
     <Tab.Navigator barStyle={{backgroundColor: 'black'}}>
       <Tab.Screen
-        name={'Home'}
+        name={t('homePage')}
         component={HomeScreen}
         options={{
           tabBarIcon: ({color}) => (
@@ -28,8 +27,8 @@ const HomeTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={'Görevlerim'}
-        component={Görevlerim}
+        name={t('missions')}
+        component={MissionsScreen}
         options={{
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons
@@ -41,7 +40,7 @@ const HomeTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={'Çevrimdışı'}
+        name={t('offlinePage')}
         component={OfflineScreen}
         options={{
           tabBarIcon: ({color}) => (
@@ -54,7 +53,7 @@ const HomeTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={'Ayarlar'}
+        name={t('settings')}
         component={SettingsScreen}
         options={{
           tabBarIcon: ({color}) => (

@@ -11,18 +11,20 @@ import {
   Heading,
   Box,
 } from 'native-base';
-import {FlatList} from 'react-native-gesture-handler';
-import settings from '../../../assets/data/settings';
+
 import InternetConnection from '../../components/InternetAlert/InternetConnection';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Context} from '../../store/context';
 import {useNetInfo} from '@react-native-community/netinfo';
+
+import { useTranslation } from 'react-i18next';
 const SettingsScreen = ({navigation}) => {
   const context = useContext(Context);
   const netInfo = useNetInfo();
   function toggle() {
     context.toggleOfflineMod();
   }
+  const {t, i18n} = useTranslation();
 
   return (
     <NativeBaseProvider>
@@ -38,12 +40,12 @@ const SettingsScreen = ({navigation}) => {
                 : 0
             }
             paddingX={5}>
-            <Heading size="2xl">Ayarlar</Heading>
+            <Heading size="2xl">{t('settings')}</Heading>
             <HStack
               marginTop={8}
               alignItems="center"
               justifyContent="space-between">
-              <Text fontSize="md">Çevrimdışı Mod</Text>
+              <Text fontSize="md">{t('offlineMode')}</Text>
               <Switch size="sm" onValueChange={toggle} value={context.mod} />
             </HStack>
             <Divider my="2" />
@@ -53,7 +55,7 @@ const SettingsScreen = ({navigation}) => {
                   navigation.navigate('Language');
                 }}>
                 <View style={styles.item}>
-                  <Text fontSize="md">{'Dil'}</Text>
+                  <Text fontSize="md">{t('language')}</Text>
                   <Entypo name="chevron-right" size={20} />
                 </View>
               </TouchableOpacity>
@@ -62,13 +64,13 @@ const SettingsScreen = ({navigation}) => {
             <View style={styles.row}>
               <TouchableOpacity onPress={() => {}}>
                 <View style={styles.item}>
-                  <Text fontSize="md">{'Resim ve Uygulama Ayarları'}</Text>
+                  <Text fontSize="md">{t('appSettings')}</Text>
                   <Entypo name="chevron-right" size={20} />
                 </View>
               </TouchableOpacity>
               <Divider my="2" />
             </View>
-            <Heading size="sm">Cihaz UUID</Heading>
+            <Heading size="sm">{t('uuid')}</Heading>
             <Text fontSize="sm">{context.deviceID}</Text>
           </VStack>
         </Box>
