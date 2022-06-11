@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView,TouchableOpacity} from 'react-native';
 import RadioButtonComponent from '../RadioButton/RadioButtonComponent';
 import TextAreaComponent from '../TextArea/TextAreaComponent';
-import {NativeBaseProvider, Center, ScrollView} from 'native-base';
+import {NativeBaseProvider, Center, ScrollView, Button} from 'native-base';
 import styles from './style';
 import Config from 'react-native-config';
 import useFetch from '../../hooks/useFetch/useFetch';
@@ -13,7 +13,11 @@ import SubmitButons from '../SubmitButons/SubmitButons';
 import InputEmail from '../InputEmail/InputEmail';
 import InputNumber from '../InputNumber/InputNumber';
 import uuid from 'react-native-uuid';
-const FormScreen = ({route}) => {
+import Entypo from 'react-native-vector-icons/Entypo';
+import Gallery from '../Gallery/Gallery';
+import Video from '../Video/Video';
+import ScanScreen from '../Scanner/Scanner';
+const FormScreen = ({route,navigation}) => {
   const {id, formName} = route.params;
   const {loading, error, data} = useFetch(`${Config.API_URL}/${id}`);
   const formID = uuid.v4();
@@ -97,6 +101,19 @@ const FormScreen = ({route}) => {
             <TextAreaComponent valueChange={textAreaInputChange} />
             <CheckBox valueChange={checkBoxChange} />
             <RadioButtonComponent valueChange={radioButtonChange} />
+            <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('CameraComponent');
+                  }}>
+                <View style={styles.item}>
+                  <Text fontSize="md">Take Photo</Text>
+                  <Entypo name="chevron-right" size={20} />
+                </View>
+              </TouchableOpacity>
+              <Gallery />
+              <Video />
+              <Button onPress={() => {navigation.navigate('Scanner')}}>Barkod</Button>
+
             <SubmitButons data={formData} />
           </ScrollView>
         </Center>

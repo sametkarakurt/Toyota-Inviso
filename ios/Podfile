@@ -19,6 +19,10 @@ target 'toyotaInviso' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
+  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
   target 'toyotaInvisoTests' do
     inherit! :complete
     # Pods for testing
