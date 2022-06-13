@@ -1,65 +1,40 @@
-import React, { useRef } from "react";
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { Camera, useCameraDevices } from 'react-native-vision-camera';
+'use strict';
+
+import React, { Component } from 'react';
+
 import {
-  Checkbox,
-  Heading,
-  HStack,
-  VStack,
+  AppRegistry,
+  StyleSheet,
   Text,
-  Box,
-  Center,
-  NativeBaseProvider,
-  Button
-} from 'native-base';
-const CameraComponent = props => {
-    const camera = useRef(null)
-    const [hasPermission, setHasPermission] = React.useState(false);
-    const devices = useCameraDevices();
-    const device = devices.back;
-  
-    React.useEffect(() => {
-      (async () => {
-        const status = await Camera.requestCameraPermission();
-        setHasPermission(status === 'authorized');
-      })();
-    }, []);
+  TouchableOpacity,
+  View,
+  Linking
+} from 'react-native';
+import { withNavigation } from 'react-navigation';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
+import VideoRecorder from 'react-native-beautiful-video-recorder';
+export default class CameraComponent extends Component {
+  start = () => {
+    // 30 seconds
+    this.videoRecorder.open({ maxLength: 30 },(data) => {
+        console.log('captured data', data);
+    });
+}
 
-    const takePhoto = async () => {
-        const photo = await camera.takePhoto({
-            qualityPrioritization: 'quality',
-            flash: 'on',
-            enableAutoRedEyeReduction: true
-          })
-    }
+  render() {
+    return (
+      <View>
 
-  return (
-    <NativeBaseProvider>
+    <TouchableOpacity onPress={this.start}>
+      <Text>Start</Text>
+    </TouchableOpacity>
+    <VideoRecorder ref={(ref) => { this.videoRecorder = ref; }} />
+  </View>
+    );
+  }
+}
 
 
-        {device != null &&
-        hasPermission && (
-        <>
-            <Camera
-            ref={camera}
-            style={StyleSheet.absoluteFill}
-            device={device}
-            isActive={true}
-            preset="medium"
-            />
-                    <Button
-          w="50%"
-          colorScheme="yellow"
-          onPress={() => {
-            takePhoto();
-          }}>
-          KAYDET
-        </Button>
-        </>)}
-          
- 
-    </NativeBaseProvider>
-  );
-};
 
-export default CameraComponent;
+AppRegistry.registerComponent('CameraComponent', () => CameraComponent);

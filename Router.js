@@ -10,8 +10,9 @@ import HomeTabNavigator from './src/navigation/HomeTabNavigator';
 import FormScreen from './src/components/Form/Form';
 import ContextProvider from './src/store/context';
 import LanguageScreen from './src/components/LanguageScreen/LanguageScreen';
-import CameraComponent from './src/components/Camera/Camera';
 import ScanScreen from './src/components/Scanner/Scanner';
+import CameraComponent from './src/components/Camera/Camera';
+import DigitalSignature from './src/components/DigitalSignature/DigitalSignature';
 const Stack = createStackNavigator();
 
 export default function App({navigation}) {
@@ -118,12 +119,11 @@ export default function App({navigation}) {
                   component={HomeTabNavigator}
                   options={{headerShown: false}}
                 />
-  
                 <Stack.Screen name="Form" component={FormScreen} />
                 <Stack.Screen name="Language" component={LanguageScreen} />
-                <Stack.Screen name="CameraComponent" component={CameraComponent} />
                 <Stack.Screen name="Scanner" component={ScanScreen} />
-  
+                <Stack.Screen name="CameraComponent" component={CameraComponent} />
+                <Stack.Screen name="DigitalSignature" component={DigitalSignature} />
               </>
             )}
           </Stack.Navigator>

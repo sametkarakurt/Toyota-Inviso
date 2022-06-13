@@ -19,17 +19,13 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
     title: 'Take Video',
     type: 'capture',
     options: {
-      saveToPhotos: true,
-      mediaType: 'video',
-      durationLimit: 10,
-      videoQuality: 'high'
+      mediaType: 'video'
     },
 
     
   }
 const Video = () => {
 
- 
   const takeVideo = async () => {
     const result = await launchCamera(options);
     console.log(result)

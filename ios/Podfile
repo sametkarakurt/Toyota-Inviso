@@ -5,6 +5,9 @@ platform :ios, '11.0'
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'toyotaInviso' do
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -19,9 +22,7 @@ target 'toyotaInviso' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
-  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
   target 'toyotaInvisoTests' do
     inherit! :complete

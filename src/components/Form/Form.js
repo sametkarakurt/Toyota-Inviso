@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView,TouchableOpacity} from 'react-native';
+import {View, Text, SafeAreaView} from 'react-native';
 import RadioButtonComponent from '../RadioButton/RadioButtonComponent';
 import TextAreaComponent from '../TextArea/TextAreaComponent';
 import {NativeBaseProvider, Center, ScrollView, Button} from 'native-base';
@@ -12,11 +12,11 @@ import MultiSelect from '../MultiSelect/MultiSelect';
 import SubmitButons from '../SubmitButons/SubmitButons';
 import InputEmail from '../InputEmail/InputEmail';
 import InputNumber from '../InputNumber/InputNumber';
-import uuid from 'react-native-uuid';
-import Entypo from 'react-native-vector-icons/Entypo';
 import Gallery from '../Gallery/Gallery';
 import Video from '../Video/Video';
-import ScanScreen from '../Scanner/Scanner';
+import uuid from 'react-native-uuid';
+import App from '../Date/Date';
+
 const FormScreen = ({route,navigation}) => {
   const {id, formName} = route.params;
   const {loading, error, data} = useFetch(`${Config.API_URL}/${id}`);
@@ -101,19 +101,12 @@ const FormScreen = ({route,navigation}) => {
             <TextAreaComponent valueChange={textAreaInputChange} />
             <CheckBox valueChange={checkBoxChange} />
             <RadioButtonComponent valueChange={radioButtonChange} />
-            <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('CameraComponent');
-                  }}>
-                <View style={styles.item}>
-                  <Text fontSize="md">Take Photo</Text>
-                  <Entypo name="chevron-right" size={20} />
-                </View>
-              </TouchableOpacity>
-              <Gallery />
+            <Gallery />
               <Video />
-              <Button onPress={() => {navigation.navigate('Scanner')}}>Barkod</Button>
-
+            <Button onPress={() => {navigation.navigate('Scanner')}}>Barkod</Button>
+            <Button onPress={() => {navigation.navigate('CameraComponent')}}>Video</Button>
+            <Button onPress={() => {navigation.navigate('DigitalSignature')}}>Dijital İmza</Button>
+            <App />
             <SubmitButons data={formData} />
           </ScrollView>
         </Center>
@@ -123,3 +116,4 @@ const FormScreen = ({route,navigation}) => {
 };
 
 export default FormScreen;
+

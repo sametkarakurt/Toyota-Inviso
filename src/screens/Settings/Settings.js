@@ -51,9 +51,9 @@ const SettingsScreen = ({navigation}) => {
             <Divider my="2" />
             <View style={styles.row}>
               <TouchableOpacity
-                 onPress={() => {
-                   navigation.navigate('Language');
-                 }}>
+                onPress={() => {
+                  navigation.navigate('Language');
+                }}>
                 <View style={styles.item}>
                   <Text fontSize="md">{t('language')}</Text>
                   <Entypo name="chevron-right" size={20} />
