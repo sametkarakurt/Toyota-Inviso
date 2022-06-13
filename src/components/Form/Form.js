@@ -16,6 +16,7 @@ import Gallery from '../Gallery/Gallery';
 import Video from '../Video/Video';
 import uuid from 'react-native-uuid';
 import App from '../Date/Date';
+import Location from '../Location/Location';
 
 const FormScreen = ({route,navigation}) => {
   const {id, formName} = route.params;
@@ -107,6 +108,7 @@ const FormScreen = ({route,navigation}) => {
             <Button onPress={() => {navigation.navigate('CameraComponent')}}>Video</Button>
             <Button onPress={() => {navigation.navigate('DigitalSignature')}}>Dijital İmza</Button>
             <App />
+            <Location />
             <SubmitButons data={formData} />
           </ScrollView>
         </Center>

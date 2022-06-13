@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Platform, StyleSheet, Switch, Text, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const Date = () => {
+const App = () => {
   const [pickerMode, setPickerMode] = useState(null);
   const [inline, setInline] = useState(false);
 
@@ -60,4 +60,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Date;
+export default App;
