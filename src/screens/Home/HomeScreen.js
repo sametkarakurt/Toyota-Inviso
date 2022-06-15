@@ -33,7 +33,7 @@ export function HomeScreen({navigation}) {
   );
 
   useEffect(() => {
-    console.log(context.language);
+    console.log(data);
   }, []);
   const netInfo = useNetInfo();
 
