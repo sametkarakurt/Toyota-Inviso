@@ -5,7 +5,7 @@ import {
   Pressable,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {FlatList, TextInput} from 'react-native-gesture-handler';
 
 import Fonstisto from 'react-native-vector-icons/Fontisto';
 
@@ -16,9 +16,21 @@ import InternetConnection from '../../components/InternetAlert/InternetConnectio
 import FormCard from '../../components/FormCard/FormCard';
 import useFetch from '../../hooks/useFetch/useFetch';
 import Config from 'react-native-config';
-import {Text, Box, NativeBaseProvider} from 'native-base';
+import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading } from "native-base";
+
+
 import {Context} from '../../store/context';
+
+
+
+
 export function HomeScreen({navigation}) {
+
+  const [filterData,setFilterData] = useState([])
+  const [masterData,setMasterData] = useState([])
+  
+  const [search,setSearch] = useState(null)
+  
   const context = useContext(Context);
 
   const {loading, data, error} = useFetch(Config.API_URL);
@@ -33,9 +45,32 @@ export function HomeScreen({navigation}) {
   );
 
   useEffect(() => {
-    console.log(data);
+    setFilterData(data);
+    setMasterData(data);
+
   }, []);
   const netInfo = useNetInfo();
+
+  const searchFilter = (text) => {
+    if(text) {
+      const newData = masterData.filter((item) => {
+        const itemData = item.name ? item.name.toUpperCase() 
+        : ''.toUpperCase();
+
+
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    setFilterData(newData);
+    setSearch(text);
+  }else {
+    setFilterData(masterData);
+    setSearch(text);
+  }
+} 
+    
+    
+  
 
   return (
     <NativeBaseProvider>
@@ -43,17 +78,14 @@ export function HomeScreen({navigation}) {
         <Box>
           {(JSON.stringify(netInfo.isConnected) === 'false' ||
             context.mod === true) && <InternetConnection />}
-          <Pressable
-            style={styles.searchButton}
-            onPress={() => console.log('Samet')}>
-            <Fonstisto name="search" size={25} color={'black'} />
-            <Text style={styles.buttonText}>Search Form</Text>
-          </Pressable>
-          <FlatList data={data} renderItem={renderForm} />
-          <FormCard
-            form={renderForm}
-            onSelect={() => handleFormSelect(renderForm.id, renderForm.name)}
-          />
+         
+
+     
+    
+        <Input marginLeft="5" placeholder="Search" width="90%"  borderRadius="4" py="3" px="1" fontSize="14" underlineColorAndroid="transparent" onChangeText={(text) =>searchFilter(text)} />
+
+          
+          <FlatList data={filterData} renderItem={renderForm} />
           
         </Box>
       </SafeAreaView>

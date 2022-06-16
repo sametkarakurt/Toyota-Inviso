@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -18,6 +18,19 @@ import {
 } from 'native-base';
 const RadioButtonComponent = props => {
   const [value, setValue] = React.useState('');
+  const [data,setData] = useState([])
+  useEffect(() => {
+
+    for(i = 2; i < Object.keys(props.options).length; i++) {
+      const value = String(i);
+      setData(oldArray => [...oldArray, {
+        item: props.options[value].key,
+        id: props.options[value].name,
+      }])
+    }
+
+
+  }, []);
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -33,12 +46,13 @@ const RadioButtonComponent = props => {
               setValue(nextValue);
               props.valueChange(nextValue);
             }}>
-            <Radio value="bay" my={1}>
-              Bay
-            </Radio>
-            <Radio value="bayan" my={1}>
-              Bayan
-            </Radio>
+
+      {data.map((item)=>{
+         return  <Radio value={item.id} my={1}>
+         {item.item}
+       </Radio>
+     })}
+
           </Radio.Group>
         </VStack>
       </Box>
