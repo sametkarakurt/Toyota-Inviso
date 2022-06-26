@@ -19,13 +19,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 25,
+    marginTop: 5,
     flexDirection: 'row',
-    top: 30,
   },
 
   item: {
-    marginBottom: 20,
+    marginTop: 20,
     backgroundColor: '#fff',
     padding: 15,
     borderRadius: 10,
@@ -34,7 +33,6 @@ const styles = StyleSheet.create({
   },
 
   row: {
-    top: 50,
     paddingHorizontal: 20,
   },
 });
