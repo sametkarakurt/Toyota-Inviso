@@ -9,7 +9,7 @@ import {
   NativeBaseProvider,
 } from 'native-base';
 import {Text, View} from 'react-native';
-const TextAreaComponent = () => {
+const TextAreaComponent = props => {
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -17,7 +17,11 @@ const TextAreaComponent = () => {
           <HStack alignItems="baseline">
             <Heading fontSize="lg">Text Area</Heading>
           </HStack>
-          <TextArea placeholder="Text Area Placeholder" w="100%" align />
+          <TextArea
+            placeholder="Text Area Placeholder"
+            w="100%"
+            onChangeText={text => props.valueChange(text)}
+          />
         </VStack>
       </Box>
     </NativeBaseProvider>

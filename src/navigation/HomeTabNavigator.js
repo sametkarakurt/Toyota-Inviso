@@ -12,7 +12,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 const HomeTabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator barStyle={{backgroundColor: 'black'}}>
       <Tab.Screen
         name={'Formlar'}
         component={HomeScreen}

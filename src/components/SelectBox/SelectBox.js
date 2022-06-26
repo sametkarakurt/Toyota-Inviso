@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View} from 'react-native';
 import SelectBox from 'react-native-multi-selectbox';
 import {xorBy} from 'lodash';
@@ -21,8 +21,9 @@ const K_OPTIONS = [
     id: 'male',
   },
 ];
-const SelectBoxComponent = () => {
+const SelectBoxComponent = props => {
   const [selectedTeam, setSelectedTeam] = useState({});
+
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -33,7 +34,10 @@ const SelectBoxComponent = () => {
           <SelectBox
             options={K_OPTIONS}
             value={selectedTeam}
-            onChange={onChange()}
+            onChange={val => {
+              setSelectedTeam(val);
+              props.valueChange(val.id);
+            }}
             arrowIconColor={'black'}
             searchIconColor={'black'}
             toggleIconColor={'black'}

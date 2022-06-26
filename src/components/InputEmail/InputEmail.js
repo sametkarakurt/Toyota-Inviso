@@ -10,7 +10,7 @@ import {
   NativeBaseProvider,
   Input,
 } from 'native-base';
-const InputEmail = () => {
+const InputEmail = props => {
   const [groupValue, setGroupValue] = React.useState(['Öğrenci', 'Çalışan']);
   return (
     <NativeBaseProvider>
@@ -20,7 +20,7 @@ const InputEmail = () => {
             <Heading fontSize="lg">Input Email</Heading>
           </HStack>
 
-          <Input />
+          <Input onChangeText={text => props.valueChange(text)} />
         </VStack>
       </Box>
     </NativeBaseProvider>

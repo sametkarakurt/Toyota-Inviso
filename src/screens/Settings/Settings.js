@@ -25,7 +25,7 @@ const SettingsScreen = ({route}) => {
             marginTop={8}
             alignItems="center"
             justifyContent="space-between">
-            <Text fontSize="md">Bluetooth</Text>
+            <Text fontSize="md">Çevrimdışı Mod</Text>
             <Switch size="sm" />
           </HStack>
           <Divider my="2" />

@@ -13,62 +13,17 @@ import {
 import {xorBy} from 'lodash';
 const K_OPTIONS = [
   {
-    item: 'Juventus',
-    id: 'JUVE',
+    item: 'Denizli',
+    id: '0',
   },
   {
-    item: 'Real Madrid',
-    id: 'RM',
-  },
-  {
-    item: 'Barcelona',
-    id: 'BR',
-  },
-  {
-    item: 'PSG',
-    id: 'PSG',
-  },
-  {
-    item: 'FC Bayern Munich',
-    id: 'FBM',
-  },
-  {
-    item: 'Manchester United FC',
-    id: 'MUN',
-  },
-  {
-    item: 'Manchester City FC',
-    id: 'MCI',
-  },
-  {
-    item: 'Everton FC',
-    id: 'EVE',
-  },
-  {
-    item: 'Tottenham Hotspur FC',
-    id: 'TOT',
-  },
-  {
-    item: 'Chelsea FC',
-    id: 'CHE',
-  },
-  {
-    item: 'Liverpool FC',
-    id: 'LIV',
-  },
-  {
-    item: 'Arsenal FC',
-    id: 'ARS',
-  },
-
-  {
-    item: 'Leicester City FC',
-    id: 'LEI',
+    item: 'İstanbul',
+    id: '1',
   },
 ];
 
-const MultiSelect = () => {
-  const [selectedTeams, setSelectedTeams] = useState([]);
+const MultiSelect = props => {
+  const [selected, setSelected] = useState([]);
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -78,8 +33,11 @@ const MultiSelect = () => {
           </HStack>
           <SelectBox
             options={K_OPTIONS}
-            selectedValues={selectedTeams}
-            onMultiSelect={onMultiChange()}
+            selectedValues={selected}
+            onMultiSelect={item => {
+              setSelected(xorBy(selected, [item], 'id'));
+              props.valueChange(xorBy(selected, [item], 'id'));
+            }}
             onTapClose={onMultiChange()}
             arrowIconColor={'black'}
             toggleIconColor={'black'}
@@ -94,7 +52,7 @@ const MultiSelect = () => {
   );
 
   function onMultiChange() {
-    return item => setSelectedTeams(xorBy(selectedTeams, [item], 'id'));
+    return item => setSelected(xorBy(selected, [item], 'id'));
   }
 };
 

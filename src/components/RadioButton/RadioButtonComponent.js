@@ -16,8 +16,8 @@ import {
   Box,
   VStack,
 } from 'native-base';
-const RadioButtonComponent = () => {
-  const [value, setValue] = React.useState('one');
+const RadioButtonComponent = props => {
+  const [value, setValue] = React.useState('');
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -31,11 +31,12 @@ const RadioButtonComponent = () => {
             value={value}
             onChange={nextValue => {
               setValue(nextValue);
+              props.valueChange(nextValue);
             }}>
-            <Radio value="one" my={1}>
+            <Radio value="bay" my={1}>
               Bay
             </Radio>
-            <Radio value="two" my={1}>
+            <Radio value="bayan" my={1}>
               Bayan
             </Radio>
           </Radio.Group>

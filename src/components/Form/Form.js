@@ -12,31 +12,81 @@ import MultiSelect from '../MultiSelect/MultiSelect';
 import SubmitButons from '../SubmitButons/SubmitButons';
 import InputEmail from '../InputEmail/InputEmail';
 import InputNumber from '../InputNumber/InputNumber';
+import uuid from 'react-native-uuid';
 const FormScreen = ({route}) => {
-  const {id} = route.params;
+  const {id, formName} = route.params;
   const {loading, error, data} = useFetch(`${Config.API_URL}/${id}`);
+  const formID = uuid.v4();
 
-  console.log(data);
+  var date = new Date().getDate();
+  var month = new Date().getMonth() + 1;
+  var year = new Date().getFullYear();
+
+  var currentDate = date + '/' + month + '/' + year;
+
+  const [formData, setFormData] = useState({
+    id: formID,
+    formName: formName,
+    date: currentDate,
+    number: '',
+    email: '',
+    multiSelect: '',
+    select: '',
+    textArea: '',
+    checkBox: '',
+    radioButton: '',
+    situation: 'Completed',
+  });
+
+  const numberInputChange = text => {
+    setFormData({...formData, number: text});
+  };
+
+  const emailInputChange = text => {
+    setFormData({...formData, email: text});
+  };
+  const multiSelectChange = text => {
+    setFormData({...formData, multiSelect: text});
+  };
+
+  const selectChange = text => {
+    setFormData({...formData, select: text});
+  };
+
+  const textAreaInputChange = text => {
+    setFormData({...formData, textArea: text});
+  };
+
+  const checkBoxChange = text => {
+    setFormData({...formData, checkBox: text});
+  };
+
+  const radioButtonChange = text => {
+    setFormData({...formData, radioButton: text});
+  };
+
   return (
     <NativeBaseProvider>
-      <Center>
-        <ScrollView
-          marginTop={5}
-          maxW="90%"
-          h="100%"
-          _contentContainerStyle={{
-            minW: '90%',
-          }}>
-          <InputNumber />
-          <InputEmail />
-          <MultiSelect />
-          <SelectBox />
-          <TextAreaComponent />
-          <CheckBox />
-          <RadioButtonComponent />
-          <SubmitButons />
-        </ScrollView>
-      </Center>
+      <SafeAreaView>
+        <Center>
+          <ScrollView
+            marginTop={5}
+            maxW="90%"
+            h="100%"
+            _contentContainerStyle={{
+              minW: '90%',
+            }}>
+            <InputNumber valueChange={numberInputChange} />
+            <InputEmail valueChange={emailInputChange} />
+            <MultiSelect valueChange={multiSelectChange} />
+            <SelectBox valueChange={selectChange} />
+            <TextAreaComponent valueChange={textAreaInputChange} />
+            <CheckBox valueChange={checkBoxChange} />
+            <RadioButtonComponent valueChange={radioButtonChange} />
+            <SubmitButons data={formData} />
+          </ScrollView>
+        </Center>
+      </SafeAreaView>
     </NativeBaseProvider>
   );
 };
