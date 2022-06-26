@@ -51,7 +51,7 @@ export function HomeScreen({navigation}) {
           </Pressable>
           <FlatList data={data} renderItem={renderForm} />
 
-          <Text fontSize="xl">{context.language}</Text>
+          
         </Box>
       </SafeAreaView>
     </NativeBaseProvider>
