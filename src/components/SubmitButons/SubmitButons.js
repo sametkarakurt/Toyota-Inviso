@@ -32,26 +32,6 @@ const SubmitButons = props => {
     AsyncStorage.multiSet(arr);
   };
 
-  const getData = async () => {
-    try {
-      const keys = await AsyncStorage.getAllKeys();
-
-      if (keys.length > 0) {
-        const storageJSON = await AsyncStorage.multiGet(keys);
-        const storageData = storageJSON.map(item => [
-          item[0],
-          JSON.parse(item[1]),
-        ]);
-        console.log(storageData);
-        setData(storageData);
-      } else {
-        setData(null);
-      }
-    } catch (err) {
-      console.warn(`ERROR in getData: ${err}`);
-    }
-  };
-
   return (
     <NativeBaseProvider>
       <HStack w="100%" justifyContent={'space-between'}>
@@ -59,7 +39,7 @@ const SubmitButons = props => {
           w="50%"
           colorScheme="green"
           onPress={() => {
-            getData();
+            axios.post('http://localhost:3000/forms', props.data);
           }}>
           GÖNDER
         </Button>

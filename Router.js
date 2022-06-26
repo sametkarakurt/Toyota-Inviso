@@ -8,6 +8,8 @@ import {SignInScreen} from './src/screens/Login/SignInScreen';
 import {AuthContext} from './src/screens/utily';
 import HomeTabNavigator from './src/navigation/HomeTabNavigator';
 import FormScreen from './src/components/Form/Form';
+import ContextProvider from './src/store/context';
+import LanguageScreen from './src/components/LanguageScreen/LanguageScreen';
 
 const Stack = createStackNavigator();
 
@@ -89,36 +91,39 @@ export default function App({navigation}) {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          {state.isLoading ? (
-            // We haven't finished checking for the token yet
-            <Stack.Screen name="Splash" component={SplashScreen} />
-          ) : state.userToken == null ? (
-            // No token found, user isn't signed in
-            <Stack.Screen
-              name="SignIn"
-              component={SignInScreen}
-              options={{
-                title: 'Sign in',
-                // When logging out, a pop animation feels intuitive
-                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-                headerShown: false,
-              }}
-            />
-          ) : (
-            // User is signed in
-            <>
+      <ContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            {state.isLoading ? (
+              // We haven't finished checking for the token yet
+              <Stack.Screen name="Splash" component={SplashScreen} />
+            ) : state.userToken == null ? (
+              // No token found, user isn't signed in
               <Stack.Screen
-                name="Formlar"
-                component={HomeTabNavigator}
-                options={{headerShown: false}}
+                name="SignIn"
+                component={SignInScreen}
+                options={{
+                  title: 'Sign in',
+                  // When logging out, a pop animation feels intuitive
+                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                  headerShown: false,
+                }}
               />
-              <Stack.Screen name="Form" component={FormScreen} />
-            </>
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
+            ) : (
+              // User is signed in
+              <>
+                <Stack.Screen
+                  name="Formlar"
+                  component={HomeTabNavigator}
+                  options={{headerShown: false}}
+                />
+                <Stack.Screen name="Form" component={FormScreen} />
+                <Stack.Screen name="Language" component={LanguageScreen} />
+              </>
+            )}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ContextProvider>
     </AuthContext.Provider>
   );
 }

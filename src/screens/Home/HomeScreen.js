@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
-  Text,
   SafeAreaView,
   Pressable,
   TouchableWithoutFeedback,
@@ -17,16 +16,11 @@ import InternetConnection from '../../components/InternetAlert/InternetConnectio
 import FormCard from '../../components/FormCard/FormCard';
 import useFetch from '../../hooks/useFetch/useFetch';
 import Config from 'react-native-config';
-import {
-  Checkbox,
-  Heading,
-  HStack,
-  VStack,
-  Box,
-  Center,
-  NativeBaseProvider,
-} from 'native-base';
+import {Text, Box, NativeBaseProvider} from 'native-base';
+import {Context} from '../../store/context';
 export function HomeScreen({navigation}) {
+  const context = useContext(Context);
+
   const {loading, data, error} = useFetch(Config.API_URL);
   const handleFormSelect = (id, formName) => {
     navigation.navigate('Form', {id: id, formName: formName});
@@ -37,20 +31,18 @@ export function HomeScreen({navigation}) {
       onSelect={() => handleFormSelect(item.id, item.name)}
     />
   );
-  const netInfo = useNetInfo();
 
   useEffect(() => {
-    if (JSON.stringify(netInfo.isConnected) === 'true') {
-    }
-  }, [netInfo.isConnected]);
+    console.log(context.language);
+  }, []);
+  const netInfo = useNetInfo();
 
   return (
     <NativeBaseProvider>
       <SafeAreaView style={styles.container}>
         <Box>
-          {JSON.stringify(netInfo.isConnected) === 'false' && (
-            <InternetConnection />
-          )}
+          {(JSON.stringify(netInfo.isConnected) === 'false' ||
+            context.mod === true) && <InternetConnection />}
           <Pressable
             style={styles.searchButton}
             onPress={() => console.log('Samet')}>
@@ -58,6 +50,8 @@ export function HomeScreen({navigation}) {
             <Text style={styles.buttonText}>Search Form</Text>
           </Pressable>
           <FlatList data={data} renderItem={renderForm} />
+
+          <Text fontSize="xl">{context.language}</Text>
         </Box>
       </SafeAreaView>
     </NativeBaseProvider>

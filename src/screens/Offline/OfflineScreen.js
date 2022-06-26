@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -18,9 +18,14 @@ import {
   Cell,
 } from 'react-native-table-component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import InternetConnection from '../../components/InternetAlert/InternetConnection';
+import {Context} from '../../store/context';
+import {useNetInfo} from '@react-native-community/netinfo';
+import {NativeBaseProvider, Box} from 'native-base';
 const OfflineScreen = ({route}) => {
   const [data, setData] = useState([]);
+  const context = useContext(Context);
+  const netInfo = useNetInfo();
   const getData = async () => {
     try {
       const keys = await AsyncStorage.getAllKeys();
@@ -47,23 +52,44 @@ const OfflineScreen = ({route}) => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.container}>
-        <Table borderStyle={{borderWidth: 2, borderColor: 'gray'}}>
-          <Row data={tableHead} style={styles.head} textStyle={styles.text} />
-          {data.map(item => {
-            return (
-              <Rows
-                data={[
-                  [item[0], item[1].formName, item[1].date, item[1].situation],
-                ]}
+    <NativeBaseProvider>
+      <SafeAreaView>
+        <Box
+          marginTop={
+            JSON.stringify(netInfo.isConnected) === 'false' ||
+            context.mod === true
+              ? 0
+              : 7
+          }>
+          {(JSON.stringify(netInfo.isConnected) === 'false' ||
+            context.mod === true) && <InternetConnection />}
+          <ScrollView style={styles.container}>
+            <Table borderStyle={{borderWidth: 2, borderColor: 'gray'}}>
+              <Row
+                data={tableHead}
+                style={styles.head}
                 textStyle={styles.text}
               />
-            );
-          })}
-        </Table>
-      </ScrollView>
-    </SafeAreaView>
+              {data.map(item => {
+                return (
+                  <Rows
+                    data={[
+                      [
+                        item[0],
+                        item[1].formName,
+                        item[1].date,
+                        item[1].situation,
+                      ],
+                    ]}
+                    textStyle={styles.text}
+                  />
+                );
+              })}
+            </Table>
+          </ScrollView>
+        </Box>
+      </SafeAreaView>
+    </NativeBaseProvider>
   );
 };
 
