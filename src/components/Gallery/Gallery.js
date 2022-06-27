@@ -1,6 +1,6 @@
  
 // Import React
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useContext } from 'react';
 // Import core components
 import {
   StyleSheet,
@@ -15,17 +15,19 @@ import {
 } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
- const options = {
-    title: `Select Image or Video\n(mixed)`,
+import {Context} from '../../store/context';
+
+const Gallery = (props) => {
+  const context = useContext(Context);
+  const options = {
+
     type: 'library',
     options: {
       selectionLimit: 0,
-      mediaType: 'mixed',
+      mediaType: 'photo',
+      quality: context.photoResolution
     },
   }
-const Gallery = () => {
-
-
 
 
   const navigation = useNavigation(); 
@@ -33,7 +35,19 @@ const Gallery = () => {
      
   const openGallery = async () => {
     const result = await launchImageLibrary(options);
-    navigation.pop(2)
+   
+    if(props.route.params.type){
+      navigation.navigate('TakePhotoComment',{uri:result.assets[0].uri,func:props.route.params.func});
+    }else{
+      if(  props.route.params.func){
+        props.route.params.func(result.assets[0].uri,"add")
+      }
+      navigation.pop(2)
+    }
+
+
+
+    
 
   }
     openGallery();

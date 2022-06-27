@@ -1,98 +1,66 @@
-// Capture Digital Signature in React Native App for Android and iOS
-// https://aboutreact.com/react-native-capture-signature/
- 
-// import React in our code
-import React, {createRef} from 'react';
+import React, {useState} from 'react';
 
-// import all the components we are going to use
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  TouchableHighlight,
-} from 'react-native';
- 
-import SignatureCapture from 'react-native-signature-capture';
- 
-const DigitalSignature = ({navigation}) => {
-  const sign = createRef();
- 
-  const saveSign = () => {
-    sign.current.saveImage();
+import {StyleSheet, View} from 'react-native';
+
+import Signature from 'react-native-signature-canvas';
+import {useNavigation} from '@react-navigation/native';
+const DigitalSignature = props => {
+  const [signature, setSign] = useState(null);
+  const navigation = useNavigation();
+  const handleSignature = signature => {
+    props.route.params.func(signature);
+    setSign(signature);
+    navigation.goBack();
   };
- 
-  const resetSign = () => {
-    sign.current.resetImage();
-  };
- 
-  const _onSaveEvent = async (result) => {
-    //result.encoded - for the base64 encoded png
-    //result.pathName - for the file path name
-    console.log(result);
-    navigation.goBack()
-  };
- 
-  const _onDragEvent = () => {
-    // This callback will be called when the user enters signature
-    console.log('dragged');
-  };
- 
+
+  const handleEmpty = () => {};
+
+  const style = `.m-signature-pad--footer
+      .button {
+        background-color: green;
+        color: #FFF;
+      }`;
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <SignatureCapture
-          style={styles.signature}
-          ref={sign}
-          onSaveEvent={_onSaveEvent}
-          onDragEvent={_onDragEvent}
-          showNativeButtons={false}
-          showTitleLabel={false}
-          viewMode={'portrait'}
-        />
-        <View style={{flexDirection: 'row'}}>
-          <TouchableHighlight
-            style={styles.buttonStyle}
-            onPress={() => {
-              saveSign();
-            }}>
-            <Text>Save</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.buttonStyle}
-            onPress={() => {
-              resetSign();
-            }}>
-            <Text>Reset</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
-    </SafeAreaView>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '30%',
+      }}>
+      <Signature
+        descriptionText=""
+        onOK={handleSignature}
+        onEmpty={handleEmpty}
+        clearText="Temizle"
+        confirmText="Kaydet"
+      />
+    </View>
   );
 };
+
 export default DigitalSignature;
- 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  titleStyle: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  signature: {
-    flex: 1,
-    borderColor: '#000033',
-    borderWidth: 1,
-  },
-  buttonStyle: {
-    flex: 1,
+  preview: {
+    height: 114,
+    backgroundColor: '#F8F8F8',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 50,
-    backgroundColor: '#eeeeee',
-    margin: 10,
+    marginTop: 15,
+    flex: 1,
+  },
+  previewText: {
+    color: '#FFF',
+    fontSize: 14,
+    height: 40,
+    lineHeight: 40,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#69B2FF',
+    width: 120,
+    textAlign: 'center',
+    marginTop: 10,
   },
 });

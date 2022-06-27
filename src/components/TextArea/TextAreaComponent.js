@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   TextArea,
   HStack,
@@ -10,6 +10,16 @@ import {
 } from 'native-base';
 import {Text, View} from 'react-native';
 const TextAreaComponent = props => {
+  const [formValue,setFormValue] = useState()
+
+  useEffect(() => {
+   
+    if(props.formData.textAreaComponent){
+      setFormValue(props.formData.textAreaComponent)
+    }
+
+
+  }, []);
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -18,9 +28,13 @@ const TextAreaComponent = props => {
             <Heading fontSize="lg">Text Area</Heading>
           </HStack>
           <TextArea
-            placeholder="Text Area Placeholder"
+            placeholder={props.options[0].key}
             w="100%"
-            onChangeText={text => props.valueChange(text)}
+            value={formValue}
+            onChangeText={text => {
+              setFormValue(text);
+              props.valueChange(text)
+            }}
           />
         </VStack>
       </Box>

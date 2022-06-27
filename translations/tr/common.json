@@ -1,18 +1,32 @@
 {
-    "translation":{
-        //Login Page
-        "username":"Kullanıcı Adı",
-        "password":"Şifre",
-        "login": "Giriş",
-        //Navigator
-        "homePage":"Anasayfa",
-        "missions":"Görevler",
-        "offlinePage":"Çevrimdışı",
-         //Settings Page
-        "settings":"Ayarlar",
-        "offlineMode":"Çevrimdışı Mod",
-        "language":"Dil",
-        "appSettings":"Resim ve Uygulama Ayarları",
-        "uuid":"Cihaz UUID"
-    }
+  "translation": {
+    //Login Page
+    "username": "Kullanıcı Adı",
+    "password": "Şifre",
+    "login": "Giriş Yap",
+    //Navigator
+    "homePage": "Anasayfa",
+    "missions": "Görevler",
+    "offlinePage": "Çevrimdışı",
+    //Settings Page
+    "settings": "Ayarlar",
+    "offlineMode": "Çevrimdışı Mod",
+    "language": "Dil",
+    "appSettings": "Resim ve Uygulama Ayarları",
+    "uuid": "Cihaz UUID",
+    //Ofline
+    "barcode": "Barkod",
+    "form": "Form",
+    "date": "Tarih",
+    "status": "Durum",
+    //Form
+    "save": "KAYDET",
+    "send": "GÖNDER",
+    //App Settings
+    "picture": "Resim",
+    "quality": "Çözünürlük",
+    "camera": "Kamera",
+    "high": "Yüksek",
+    "low": "Düşük"
+  }
 }

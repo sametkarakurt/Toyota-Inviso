@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, TouchableOpacity, SafeAreaView} from 'react-native';
+import {View, TouchableOpacity, SafeAreaView, LogBox} from 'react-native';
 import styles from './styles';
 import {
   NativeBaseProvider,
@@ -16,10 +16,10 @@ import InternetConnection from '../../components/InternetAlert/InternetConnectio
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Context} from '../../store/context';
 import {useNetInfo} from '@react-native-community/netinfo';
- 
+
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-const TakePhoto = () => {
+const TakePhoto = (props) => {
   const context = useContext(Context);
   const navigation = useNavigation(); 
   const netInfo = useNetInfo();
@@ -27,6 +27,11 @@ const TakePhoto = () => {
     context.toggleOfflineMod();
   }
   const {t, i18n} = useTranslation();
+ 
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
+
 
   return (
     <NativeBaseProvider>
@@ -35,7 +40,8 @@ const TakePhoto = () => {
             <View style={styles.row}>
               <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Video');
+                  
+                    navigation.navigate('Photo',{func:props.route.params.func,type:props.route.params.type});
                   }}>
                 <View style={styles.item}>
                   <Text fontSize="md">Fotoğraf Çek</Text>
@@ -46,7 +52,7 @@ const TakePhoto = () => {
             </View>
             <View style={styles.row}>
               <TouchableOpacity onPress={() => {
-                  navigation.navigate('Gallery');
+                  navigation.navigate('Gallery',{func:props.route.params.func,type:props.route.params.type});
         
                 }}>
                 <View style={styles.item}>

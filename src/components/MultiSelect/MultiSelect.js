@@ -17,6 +17,10 @@ const MultiSelect = props => {
   const [selected, setSelected] = useState([]);
   const [data,setData] = useState([])
   useEffect(() => {
+
+    if(props.formData.multiSelectComponent){
+      setSelected(props.formData.multiSelectComponent)
+    }
     setData([])
     for(i = 2; i < Object.keys(props.options).length; i++) {
       const value = String(i);
@@ -29,14 +33,13 @@ const MultiSelect = props => {
 
   }, []);
   return (
-    <NativeBaseProvider>
-      <Box marginBottom={5}>
-        <VStack space={2}>
-          <HStack alignItems="baseline">
-            <Heading fontSize="lg">Multi Select</Heading>
-          </HStack>
+ 
+ 
+    <View style={{marginBottom:15,marginTop:15}}>
           <SelectBox
             options={data}
+            
+            inputPlaceholder={"Nothing selected"}
             selectedValues={selected}
             onMultiSelect={item => {
               setSelected(xorBy(selected, [item], 'id'));
@@ -50,9 +53,8 @@ const MultiSelect = props => {
             labelStyle={{display: 'none'}}
             isMulti
           />
-        </VStack>
-      </Box>
-    </NativeBaseProvider>
+   </View>
+          
   );
 
   function onMultiChange() {

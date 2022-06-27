@@ -16,7 +16,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import ImageDetail from '../ImageDetail/ImageDetail';
 import { ScrollView } from 'react-native-gesture-handler';
-const TakePhotoButton = (props) => {
+const TakeVideoButton = (props) => {
     const navigation = useNavigation(); 
     const [imageArray,setImageArray] = useState();
     useEffect(() => {
@@ -36,24 +36,18 @@ const TakePhotoButton = (props) => {
         <VStack space={2}>
 
         <Button
-        colorScheme="teal"
+        colorScheme="red"
                 onPress={() => {
-                  navigation.navigate('TakePhoto',{func:props.valueChange,setUri:props.setUri});
-                }}>Fotoğraf Çek
+                  navigation.navigate('TakeVideo',{func:props.valueChange,setUri:props.setUri});
+                }}>Video Çek
           
              
                   
         
               </Button>
 
-    
-    <ScrollView horizontal={true}>
-         {props.formData.takePhoto && props.formData.takePhoto.map((item) => {
-             return    <ImageDetail key={item} uri={item} removeItem={props.valueChange} data={props.formData} />
-        })}
+  
 
-              
-</ScrollView>
 
 
      
@@ -63,4 +57,4 @@ const TakePhotoButton = (props) => {
   );
 };
 
-export default TakePhotoButton;
+export default TakeVideoButton;

@@ -1,11 +1,22 @@
 import { border } from "native-base/lib/typescript/theme/styled-system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {  Platform, StyleSheet,View,Pressable } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-
+import {
+  Checkbox,
+  Heading,
+  HStack,
+  VStack,
+  Text,
+  Box,
+  Center,
+  NativeBaseProvider,
+  Input,
+} from 'native-base';
+const DateComponent = (props) => {
   const [pickerMode, setPickerMode] = useState(null);
   const [inline, setInline] = useState(false);
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(props.formData.dateComponent);
 
   const showDatePicker = () => {
     setPickerMode("date");
@@ -15,6 +26,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
     setPickerMode(null);
   };
 
+
+  
   const handleConfirm = (date) => {
     // In order to prevent the double-shown popup bug on Android, picker has to be hidden first (https://github.com/react-native-datetimepicker/datetimepicker/issues/54#issuecomment-618776550)
     hidePicker();
@@ -35,12 +48,14 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
       day += tempDate[i]
     }
 
-    day++;
     day = String(day);
 
 
     var tempDate = day + "-" + month + "-" + year;
     setDate(tempDate);
+
+    props.valueChange(tempDate);
+
 
 
 
@@ -94,4 +109,4 @@ const style = StyleSheet.create({
   },
 });
 
-
+export default DateComponent;

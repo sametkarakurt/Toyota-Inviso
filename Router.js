@@ -11,26 +11,32 @@ import FormScreen from './src/components/Form/Form';
 import ContextProvider from './src/store/context';
 import LanguageScreen from './src/components/LanguageScreen/LanguageScreen';
 import ScanScreen from './src/components/Scanner/Scanner';
-import CameraComponent from './src/components/Camera/Camera';
+import TakeVideo from './src/components/TakeVideo/TakeVideo';
 import DigitalSignature from './src/components/DigitalSignature/DigitalSignature';
 import TakePhoto from './src/components/TakePhoto/TakePhoto';
 import TakePhotoButton from './src/components/TakePhoto/TakePhotoButton';
-import Video from './src/components/Video/Video';
+import Photo from './src/components/Photo/Photo';
 import Gallery from './src/components/Gallery/Gallery';
 import TakePhotoCommentButton from './src/components/TakePhotoComment/TakePhotoCommentButton';
 import TakePhotoComment from './src/components/TakePhotoComment/TakePhotoComment';
 import DigitalSignatureButton from './src/components/DigitalSignature/DigitalSignatureButton';
-import {LogBox} from "react-native";
+import OfflineForm from './src/components/OfflineForm/OfflineForm';
+import OfflineScreen from './src/screens/Offline/OfflineScreen';
+import TakeVideoButton from './src/components/TakeVideo/TakeVideoButton';
+import SelectVideo from './src/components/SelectVideo/SelectVideo';
+import AppSettings from './src/components/AppSettings/AppSettings';
+import VideoDetail from './src/components/TakeVideo/VideoDetail';
+import {ToastProvider} from 'react-native-toast-notifications';
+
+import {LogBox} from 'react-native';
 
 LogBox.ignoreLogs([
-"ViewPropTypes will be removed",
-"ColorPropType will be removed",
-])
+  'ViewPropTypes will be removed',
+  'ColorPropType will be removed',
+]);
 const Stack = createStackNavigator();
 
-
 export default function App({navigation}) {
-  
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -107,50 +113,87 @@ export default function App({navigation}) {
   );
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <ContextProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            {state.isLoading ? (
-              // We haven't finished checking for the token yet
-              <Stack.Screen name="Splash" component={SplashScreen} />
-            ) : state.userToken == null ? (
-              // No token found, user isn't signed in
-              <Stack.Screen
-                name="SignIn"
-                component={SignInScreen}
-                options={{
-                  title: 'Sign in',
-                  // When logging out, a pop animation feels intuitive
-                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-                  headerShown: false,
-                }}
-              />
-            ) : (
-              // User is signed in
-              <>
+    <ToastProvider>
+      <AuthContext.Provider value={authContext}>
+        <ContextProvider>
+          <NavigationContainer>
+            <Stack.Navigator>
+              {state.isLoading ? (
+                // We haven't finished checking for the token yet
+                <Stack.Screen name="Splash" component={SplashScreen} />
+              ) : state.userToken == null ? (
+                // No token found, user isn't signed in
                 <Stack.Screen
-                  name="Formlar"
-                  component={HomeTabNavigator}
-                  options={{headerShown: false}}
+                  name="SignIn"
+                  component={SignInScreen}
+                  options={{
+                    title: 'Sign in',
+                    // When logging out, a pop animation feels intuitive
+                    animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                    headerShown: false,
+                  }}
                 />
-                <Stack.Screen name="Form" component={FormScreen} />
-                <Stack.Screen name="Language" component={LanguageScreen} />
-                <Stack.Screen name="Scanner" component={ScanScreen} />
-                <Stack.Screen name="CameraComponent" component={CameraComponent} />
-                <Stack.Screen name="DigitalSignature" component={DigitalSignature} />
-                <Stack.Screen name="TakePhoto" component={TakePhoto} />
-                <Stack.Screen name="TakePhotoButton" component={TakePhotoButton} />
-                <Stack.Screen name="Video" component={Video} />
-                <Stack.Screen name="Gallery" component={Gallery} />
-                <Stack.Screen name="TakePhotoCommentButton" component={TakePhotoCommentButton} />
-                <Stack.Screen name="TakePhotoComment" component={TakePhotoComment} />
-                <Stack.Screen name="DigitalSignatureButton" component={DigitalSignatureButton} />
-              </>
-            )}
-          </Stack.Navigator>
-        </NavigationContainer>
-      </ContextProvider>
-    </AuthContext.Provider>
+              ) : (
+                // User is signed in
+                <>
+                  <Stack.Screen
+                    name="Formlar"
+                    component={HomeTabNavigator}
+                    options={{headerShown: false}}
+                  />
+                  <Stack.Screen name="Form" component={FormScreen} />
+                  <Stack.Screen name="Language" component={LanguageScreen} />
+                  <Stack.Screen name="Scanner" component={ScanScreen} />
+                  <Stack.Screen name="TakeVideo" component={TakeVideo} />
+                  <Stack.Screen
+                    name="DigitalSignature"
+                    component={DigitalSignature}
+                  />
+                  <Stack.Screen name="TakePhoto" component={TakePhoto} />
+                  <Stack.Screen
+                    name="TakePhotoButton"
+                    component={TakePhotoButton}
+                  />
+                  <Stack.Screen name="Photo" component={Photo} />
+                  <Stack.Screen name="Gallery" component={Gallery} />
+                  <Stack.Screen
+                    name="TakePhotoCommentButton"
+                    component={TakePhotoCommentButton}
+                  />
+                  <Stack.Screen
+                    name="TakePhotoComment"
+                    component={TakePhotoComment}
+                  />
+                  <Stack.Screen
+                    name="DigitalSignatureButton"
+                    component={DigitalSignatureButton}
+                  />
+                  <Stack.Screen name="OfflineForm" component={OfflineForm} />
+                  <Stack.Screen
+                    name="OfflineScreen"
+                    component={OfflineScreen}
+                  />
+                  <Stack.Screen
+                    name="TakeVideoButton"
+                    component={TakeVideoButton}
+                  />
+                  <Stack.Screen name="SelectVideo" component={SelectVideo} />
+                  <Stack.Screen
+                    name="AppSettings"
+                    options={{title: 'Resim ve Uygulama Ayarları'}}
+                    component={AppSettings}
+                  />
+                  <Stack.Screen
+                    name="VideoDetail"
+                    options={{title: ''}}
+                    component={VideoDetail}
+                  />
+                </>
+              )}
+            </Stack.Navigator>
+          </NavigationContainer>
+        </ContextProvider>
+      </AuthContext.Provider>
+    </ToastProvider>
   );
 }

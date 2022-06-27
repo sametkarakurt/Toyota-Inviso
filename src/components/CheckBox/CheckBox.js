@@ -10,9 +10,10 @@ import {
   NativeBaseProvider,
 } from 'native-base';
 const CheckBox = props => {
-  const [groupValue, setGroupValue] = React.useState([]);
+  const [groupValue, setGroupValue] = useState([]);
   const [data,setData] = useState([])
   useEffect(() => {
+    
     setData([])
     for(i = 2; i < Object.keys(props.options).length; i++) {
       const value = String(i);
@@ -20,6 +21,11 @@ const CheckBox = props => {
         item: props.options[value].key,
         id: props.options[value].name,
       }])
+
+    }
+
+    if(props.formData.chechBoxComponent){
+      setGroupValue(props.formData.chechBoxComponent)
     }
 
 
@@ -34,7 +40,7 @@ const CheckBox = props => {
 
           <Checkbox.Group
             colorScheme="green"
-            defaultValue={groupValue}
+            defaultValue={props.formData.chechBoxComponent}
             accessibilityLabel="pick an item"
             onChange={values => {
               setGroupValue(values || []);
@@ -42,7 +48,7 @@ const CheckBox = props => {
             }}>
 
             {data.map((item)=>{
-         return  <Checkbox value={item.id} my="1">
+         return  <Checkbox value={item.id} key={item.id} my="1">
          {item.item}
        </Checkbox>
      })}

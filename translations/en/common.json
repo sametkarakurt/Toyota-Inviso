@@ -1,19 +1,32 @@
 {
-    "translation":{
-        //Login Page
-        "username":"Username",
-        "password":"Password",
-        "login": "Login",
-        //Navigator
-        "homePage":"Home",
-        "missions":"Missions",
-        "offlinePage":"Offline",
-        //Settings Page
-        "settings":"Settings",
-        "offlineMode":"Offline Mode",
-        "language":"Language",
-        "appSettings":"Picture and Application Settings",
-        "uuid":"Device UUID"
-       
-    }
+  "translation": {
+    //Login Page
+    "username": "Username",
+    "password": "Password",
+    "login": "Login",
+    //Navigator
+    "homePage": "Forms",
+    "missions": "My Tasks",
+    "offlinePage": "Offline",
+    //Settings Page
+    "settings": "Settings",
+    "offlineMode": "Offline Mode",
+    "language": "Language",
+    "appSettings": "Picture and Application Settings",
+    "uuid": "Device UUID",
+    //Ofline
+    "barcode": "Barcode",
+    "form": "Form",
+    "date": "Date",
+    "status": "Status",
+    //Form
+    "save": "SAVE",
+    "send": "SEND",
+    //App Settings
+    "picture": "Picture",
+    "quality": "Quality",
+    "camera": "Camera",
+    "high": "High",
+    "low": "Low"
+  }
 }

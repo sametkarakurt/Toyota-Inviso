@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
   Checkbox,
   Heading,
@@ -11,25 +11,42 @@ import {
   Input,
   Button,
   TouchableOpacity,
-  View
+  View,
+  ScrollView
 } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-const TakePhotoCommentButton = () => {
+import ImageCommentDetail from '../ImageCommentDetail/ImageCommentDetail';
+const TakePhotoCommentButton = (props) => {
+  useEffect(() => {
+
+  }, []);
+  
+  
     const navigation = useNavigation(); 
   return (
     <NativeBaseProvider>
+  
       <Box marginBottom={5}>
         <VStack space={2}>
 
         <Button
                 onPress={() => {
-                  navigation.navigate('TakePhotoComment');
+                  navigation.navigate('TakePhoto',{formData:props.formData,func:props.valueChange,type:'comment'});
                 }}>Fotoğraf ve Yorum
           
              
                   
               
               </Button>
+
+                 
+    <ScrollView horizontal={true}>
+         {props.formData.takePhotoCommentComponent && props.formData.takePhotoCommentComponent.map((item) => {
+             return    <ImageCommentDetail key={item} value={item} removeItem={props.valueChange} data={props.formData} />
+        })}
+
+              
+</ScrollView>
         </VStack>
       </Box>
     </NativeBaseProvider>

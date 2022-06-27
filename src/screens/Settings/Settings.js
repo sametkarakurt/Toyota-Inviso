@@ -11,21 +11,29 @@ import {
   Heading,
   Box,
 } from 'native-base';
+import Clipboard from '@react-native-community/clipboard';
+import {useToast} from 'react-native-toast-notifications';
 
 import InternetConnection from '../../components/InternetAlert/InternetConnection';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Context} from '../../store/context';
 import {useNetInfo} from '@react-native-community/netinfo';
 
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 const SettingsScreen = ({navigation}) => {
   const context = useContext(Context);
+  const toast = useToast();
   const netInfo = useNetInfo();
   function toggle() {
     context.toggleOfflineMod();
   }
+
   const {t, i18n} = useTranslation();
 
+  const copyItem = item => {
+    Clipboard.setString(item);
+    toast.show('Kopyalandı', {placement: 'center', duration: 750});
+  };
   return (
     <NativeBaseProvider>
       <SafeAreaView style={styles.container}>
@@ -62,7 +70,10 @@ const SettingsScreen = ({navigation}) => {
               <Divider my="2" />
             </View>
             <View style={styles.row}>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('AppSettings');
+                }}>
                 <View style={styles.item}>
                   <Text fontSize="md">{t('appSettings')}</Text>
                   <Entypo name="chevron-right" size={20} />
@@ -71,7 +82,9 @@ const SettingsScreen = ({navigation}) => {
               <Divider my="2" />
             </View>
             <Heading size="sm">{t('uuid')}</Heading>
-            <Text fontSize="sm">{context.deviceID}</Text>
+            <TouchableOpacity onPress={() => copyItem(context.deviceID)}>
+              <Text fontSize="sm">{context.deviceID}</Text>
+            </TouchableOpacity>
           </VStack>
         </Box>
       </SafeAreaView>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
-import RadioButtonComponent from '../RadioButton/RadioButtonComponent';
+
 import TextAreaComponent from '../TextArea/TextAreaComponent';
 import {NativeBaseProvider, Radio, Heading} from 'native-base';
 import Entypo from 'react-native-vector-icons/Entypo';

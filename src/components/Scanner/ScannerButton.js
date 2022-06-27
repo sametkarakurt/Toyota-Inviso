@@ -11,30 +11,28 @@ import {
   Input,
   Button,
   TouchableOpacity,
-  View
+  View,
 } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-const ScannerButton = () => {
-    const navigation = useNavigation(); 
+import {useNavigation} from '@react-navigation/native';
+const ScannerButton = props => {
+  const navigation = useNavigation();
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
-        <VStack space={2}>
-        <View  pointerEvents="none">
-          <Input />
-        </View>
+        <HStack w="100%" justifyContent={'space-between'}>
+          <View pointerEvents="none">
+            <Input value={props.formData.scannerComponent} h="10" w="1000%" />
+          </View>
 
-        <Button
-       colorScheme="yellow"
-                onPress={() => {
-                  navigation.navigate('Scanner');
-                }}>Scan
-          
-             
-                  
-              
-              </Button>
-        </VStack>
+          <Button
+            w="25%"
+            colorScheme="warning"
+            onPress={() => {
+              navigation.navigate('Scanner', {func: props.valueChange});
+            }}>
+            Scan
+          </Button>
+        </HStack>
       </Box>
     </NativeBaseProvider>
   );

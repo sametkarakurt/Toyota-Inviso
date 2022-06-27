@@ -16,21 +16,41 @@ import {
   Box,
   VStack,
 } from 'native-base';
+import RadioGroup from 'react-native-radio-buttons-group';
+import { background } from 'native-base/lib/typescript/theme/styled-system';
+
 const RadioButtonComponent = props => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = useState();
   const [data,setData] = useState([])
   useEffect(() => {
+    setData([])
 
-    for(i = 2; i < Object.keys(props.options).length; i++) {
-      const value = String(i);
-      setData(oldArray => [...oldArray, {
-        item: props.options[value].key,
-        id: props.options[value].name,
-      }])
+    if(props.formData.radioButtonComponent != ''){
+      setData(props.formData.radioButtonComponent)
+    }else{
+      for(i = 2; i < Object.keys(props.options).length; i++) {
+        const value = String(i);
+        setData(oldArray => [...oldArray, {
+          
+          id: props.options[value].name,
+          label: props.options[value].key,
+          value: props.options[value].key,
+  
+        }])
+      }
+
     }
+  
 
 
   }, []);
+
+
+  function onPressRadioButton(radioButtonsArray) {
+    props.valueChange(radioButtonsArray)
+    setValue(radioButtonsArray);
+}
+
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -38,22 +58,19 @@ const RadioButtonComponent = props => {
           <HStack alignItems="baseline">
             <Heading fontSize="lg">RadioButton</Heading>
           </HStack>
-          <Radio.Group
-            name="myRadioGroup"
-            accessibilityLabel="favorite number"
-            value={value}
-            onChange={nextValue => {
-              setValue(nextValue);
-              props.valueChange(nextValue);
-            }}>
 
-      {data.map((item)=>{
-         return  <Radio value={item.id} my={1}>
-         {item.item}
-       </Radio>
-     })}
+          <RadioGroup 
+            containerStyle={{
+              alignItems:'flex-start',
+              justifyContent:'flex-start'}}
+            radioButtons={data} 
+            onPress={onPressRadioButton}
 
-          </Radio.Group>
+        />
+
+    
+
+       
         </VStack>
       </Box>
     </NativeBaseProvider>
