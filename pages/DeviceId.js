@@ -9,9 +9,7 @@ const DeviceId = () => {
   }, []);
 
   const showUniqueId = () => {
-    Alert.alert(context.deviceID, [
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ]);
+    Alert.alert(context.deviceID);
   };
   return null;
 };

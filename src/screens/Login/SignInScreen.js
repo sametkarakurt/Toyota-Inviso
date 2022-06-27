@@ -46,6 +46,7 @@ export function SignInScreen() {
         <Box safeArea p="2" py="8" w="90%" maxW="290">
           <DeviceId />
           <Image
+
           />
 
           <VStack space={3} mt="5">
