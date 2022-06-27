@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {Text, View} from 'react-native';
 import SelectBox from 'react-native-multi-selectbox';
 import {
@@ -11,19 +11,23 @@ import {
   Heading,
 } from 'native-base';
 import {xorBy} from 'lodash';
-const K_OPTIONS = [
-  {
-    item: 'Denizli',
-    id: '0',
-  },
-  {
-    item: 'İstanbul',
-    id: '1',
-  },
-];
+
 
 const MultiSelect = props => {
   const [selected, setSelected] = useState([]);
+  const [data,setData] = useState([])
+  useEffect(() => {
+    setData([])
+    for(i = 2; i < Object.keys(props.options).length; i++) {
+      const value = String(i);
+      setData(oldArray => [...oldArray, {
+        item: props.options[value].key,
+        id: props.options[value].name,
+      }])
+    }
+
+
+  }, []);
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -32,7 +36,7 @@ const MultiSelect = props => {
             <Heading fontSize="lg">Multi Select</Heading>
           </HStack>
           <SelectBox
-            options={K_OPTIONS}
+            options={data}
             selectedValues={selected}
             onMultiSelect={item => {
               setSelected(xorBy(selected, [item], 'id'));

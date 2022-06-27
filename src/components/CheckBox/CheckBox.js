@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   Checkbox,
   Heading,
@@ -11,6 +11,19 @@ import {
 } from 'native-base';
 const CheckBox = props => {
   const [groupValue, setGroupValue] = React.useState([]);
+  const [data,setData] = useState([])
+  useEffect(() => {
+    setData([])
+    for(i = 2; i < Object.keys(props.options).length; i++) {
+      const value = String(i);
+      setData(oldArray => [...oldArray, {
+        item: props.options[value].key,
+        id: props.options[value].name,
+      }])
+    }
+
+
+  }, []);
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
@@ -27,12 +40,12 @@ const CheckBox = props => {
               setGroupValue(values || []);
               props.valueChange(values);
             }}>
-            <Checkbox value="ogrenci" my="1">
-              Öğrenci
-            </Checkbox>
-            <Checkbox value="calisan" my="1">
-              Çalışan
-            </Checkbox>
+
+            {data.map((item)=>{
+         return  <Checkbox value={item.id} my="1">
+         {item.item}
+       </Checkbox>
+     })}
           </Checkbox.Group>
         </VStack>
       </Box>

@@ -1,6 +1,6 @@
  
 // Import React
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 // Import core components
 import {
   StyleSheet,
@@ -13,7 +13,7 @@ import {
   Center,
 } from 'native-base';
  
- 
+import { useNavigation } from '@react-navigation/native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
  const options = {
     title: 'Take Video',
@@ -24,24 +24,25 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
     
   }
+  
 const Video = () => {
 
-  const takeVideo = async () => {
-    const result = await launchCamera(options);
-    console.log(result)
-  }
+  const navigation = useNavigation(); 
+  useEffect(() => {
+    const takeVideo = async () => {
+      const result = await launchCamera(options);
+      console.log(result)
+    }
+    
+    takeVideo();
+   
 
-  return (
-    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-        <Button
-          w="90%"
-          onPress={() => {
-            takeVideo();
-          }}>
-          Kamera
-        </Button>
-    </View>
-  );
+  }, []);
+
+
+
+  return null;
+  
 };
  
 

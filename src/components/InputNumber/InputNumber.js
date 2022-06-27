@@ -18,7 +18,7 @@ const InputNumber = props => {
           <HStack alignItems="baseline">
             <Heading fontSize="lg">Input Number</Heading>
           </HStack>
-          <Input onChangeText={text => props.valueChange(text)} />
+          <Input key={props.key} onChangeText={text => props.valueChange(text)} />
         </VStack>
       </Box>
     </NativeBaseProvider>

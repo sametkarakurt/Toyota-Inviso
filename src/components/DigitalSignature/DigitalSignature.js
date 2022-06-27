@@ -41,9 +41,6 @@ const DigitalSignature = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Text style={styles.titleStyle}>
-          Capture Digital Signature in React Native App
-        </Text>
         <SignatureCapture
           style={styles.signature}
           ref={sign}

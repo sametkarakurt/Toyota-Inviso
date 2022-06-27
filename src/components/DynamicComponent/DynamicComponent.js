@@ -21,12 +21,16 @@ import DateComponent from '../Date/Date';
 import CameraComponent from '../Camera/Camera';
 import ScanScreen from '../Scanner/Scanner';
 import DigitalSignature from '../DigitalSignature/DigitalSignature';
-
+import TakePhotoButton from '../TakePhoto/TakePhotoButton';
+import TakePhotoCommentButton from '../TakePhotoComment/TakePhotoCommentButton';
+import ScannerButton from '../Scanner/ScannerButton';
+import DigitalSignatureButton from '../DigitalSignature/DigitalSignatureButton';
 
 
 const DynamicComponent = props  => {
 
   const Components = {
+    
     numberComponent : InputNumber,
     dateComponent: DateComponent,
     emailComponent: InputEmail,
@@ -35,16 +39,19 @@ const DynamicComponent = props  => {
     selectBoxComponent: SelectBox,
     chechBoxComponent: CheckBox,
     radioButtonComponent: RadioButtonComponent,
-    cameraComponent: Video,
+    cameraComponent: TakePhotoButton,
     videoComponent: CameraComponent,
-    scannerComponent: ScanScreen,
-    signatureComponent: DigitalSignature
-
+    scannerComponent: ScannerButton,
+    takePhotoCommentComponent: TakePhotoCommentButton,
+    signatureComponent: DigitalSignatureButton,
+    submitButton: SubmitButons,
+   
   }
 
+
+
   if (typeof props.type !== "undefined") {
-    return React.createElement(Components[props.type],{
-    });
+    return React.createElement(Components[props.type],{options:props.options,valueChange:props.valueChange,key:props.key});
   }
 
 
