@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useState, useContext, useEffect} from 'react';
+=======
+import React, {useState, useEffect} from 'react';
+>>>>>>> 72a9a7f7f228f89b5d8eb47bcd5b42621364f08e
 import axios from 'axios';
 import {
   Button,
@@ -11,6 +15,7 @@ import {
   HStack,
   NativeBaseProvider,
 } from 'native-base';
+<<<<<<< HEAD
 import {Context} from '../../store/context';
 import {useTranslation} from 'react-i18next';
 import {useNetInfo} from '@react-native-community/netinfo';
@@ -77,11 +82,51 @@ const SubmitButons = props => {
         </Button>
         <Button
           w="49%"
+=======
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const SubmitButons = props => {
+  const [data, setData] = useState(null);
+
+  const postData = () => {
+    axios
+      .post('http://localhost:3000/forms', props.data)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const saveData = async () => {
+    const arr = [[props.data.id, JSON.stringify(props.data)]];
+    AsyncStorage.multiSet(arr);
+  };
+
+  return (
+    <NativeBaseProvider>
+      <HStack w="100%" justifyContent={'space-between'}>
+        <Button
+          w="50%"
+          colorScheme="green"
+          onPress={() => {
+            axios.post('http://localhost:3000/forms', props.data);
+          }}>
+          GÖNDER
+        </Button>
+        <Button
+          w="50%"
+>>>>>>> 72a9a7f7f228f89b5d8eb47bcd5b42621364f08e
           colorScheme="yellow"
           onPress={() => {
             saveData();
           }}>
+<<<<<<< HEAD
           {t('save')}
+=======
+          KAYDET
+>>>>>>> 72a9a7f7f228f89b5d8eb47bcd5b42621364f08e
         </Button>
       </HStack>
     </NativeBaseProvider>

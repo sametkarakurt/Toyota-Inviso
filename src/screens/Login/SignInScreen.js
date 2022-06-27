@@ -27,11 +27,15 @@ import {
   FormControl,
 } from 'native-base';
 import DeviceId from '../../../pages/DeviceId';
+import { useTranslation } from 'react-i18next';
+
 export function SignInScreen() {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const {signIn} = React.useContext(AuthContext);
+
+  const {t, i18n} = useTranslation();
 
   function handleSubmit() {
     signIn({username, password});
@@ -42,20 +46,20 @@ export function SignInScreen() {
         <Box safeArea p="2" py="8" w="90%" maxW="290">
           <DeviceId />
           <Image
-            source={require('/Users/sametkarakurt/Desktop/toyotaInviso/images/logo3.png')}
+
           />
 
           <VStack space={3} mt="5">
             <FormControl>
-              <FormControl.Label>Username</FormControl.Label>
+              <FormControl.Label>{t('username')}</FormControl.Label>
               <Input onChange={text => setUsername(text)} />
             </FormControl>
             <FormControl>
-              <FormControl.Label>Password</FormControl.Label>
+              <FormControl.Label>{t('password')}</FormControl.Label>
               <Input type="password" onChange={text => setPassword(text)} />
             </FormControl>
             <Button mt="2" colorScheme="green" onPress={handleSubmit}>
-              Giriş
+            {t('login')}
             </Button>
             <View
               style={{

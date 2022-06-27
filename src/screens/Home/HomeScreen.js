@@ -1,40 +1,87 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, SafeAreaView, Pressable} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
-import forms from '../../../assets/data/feed';
+import React, {useState, useEffect, useContext} from 'react';
+import {
+  View,
+  SafeAreaView,
+  Pressable,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import {FlatList, TextInput} from 'react-native-gesture-handler';
+
 import Fonstisto from 'react-native-vector-icons/Fontisto';
-import Entypo from 'react-native-vector-icons/Entypo';
+
 import styles from './styles';
-import Form from '../Form/FormScreen.js';
-import NetInfo from '@react-native-community/netinfo';
+
 import {useNetInfo} from '@react-native-community/netinfo';
 import InternetConnection from '../../components/InternetAlert/InternetConnection';
-import {AuthContext} from '../src/screens/utily';
+import FormCard from '../../components/FormCard/FormCard';
+import useFetch from '../../hooks/useFetch/useFetch';
+import Config from 'react-native-config';
+import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading } from "native-base";
 
-export function HomeScreen(navigation) {
+
+import {Context} from '../../store/context';
+
+
+
+
+export function HomeScreen({navigation}) {
+
+  const [filterData,setFilterData] = useState([])
+  const [masterData,setMasterData] = useState([])
+  
+  const [search,setSearch] = useState(null)
+  
+  const context = useContext(Context);
+
+  const {loading, data, error} = useFetch(Config.API_URL);
+  const handleFormSelect = (id, formName) => {
+    navigation.navigate('Form', {id: id, formName: formName});
+  };
+  const renderForm = ({item}) => (
+    <FormCard
+      form={item}
+      onSelect={() => handleFormSelect(item.id, item.name)}
+    />
+  );
+
+  useEffect(() => {
+    setFilterData(data);
+    setMasterData(data);
+
+  }, []);
   const netInfo = useNetInfo();
-  console.log(netInfo.isConnected);
+
+  const searchFilter = (text) => {
+    if(text) {
+      const newData = masterData.filter((item) => {
+        const itemData = item.name ? item.name.toUpperCase() 
+        : ''.toUpperCase();
+
+
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    setFilterData(newData);
+    setSearch(text);
+  }else {
+    setFilterData(masterData);
+    setSearch(text);
+  }
+} 
+    
+    
+  
+
   return (
-    <View style={styles.container}>
-      <Pressable
-        style={styles.searchButton}
-        onPress={() => console.log('Samet')}>
-        <Fonstisto name="search" size={25} color={'black'} />
-        <Text style={styles.buttonText}>Search Form</Text>
-      </Pressable>
-      <InternetConnection />
-      <Text>{JSON.stringify(netInfo.isConnected)}</Text>
-      <FlatList
-        data={forms}
-        renderItem={({item}) => (
-          <View style={styles.row}>
-            <View style={styles.item}>
-              <Text>{item.title}</Text>
-              <Entypo name="chevron-right" size={16} />
-            </View>
-          </View>
-        )}
-      />
-    </View>
+    <NativeBaseProvider>
+      <SafeAreaView style={styles.container}>
+        <Box>
+          {(JSON.stringify(netInfo.isConnected) === 'false' ||
+            context.mod === true) && <InternetConnection />}
+
+          
+        </Box>
+      </SafeAreaView>
+    </NativeBaseProvider>
   );
 }
