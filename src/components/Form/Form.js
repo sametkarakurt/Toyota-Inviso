@@ -15,12 +15,7 @@ import InputNumber from '../InputNumber/InputNumber';
 import Gallery from '../Gallery/Gallery';
 import Video from '../Video/Video';
 import uuid from 'react-native-uuid';
-import DateComponent from '../Date/Date';
-import Location from '../Location/Location';
-import DynamicComponent from '../DynamicComponent/DynamicComponent';
-import axios from 'axios';
-import TakePhotoButton from '../TakePhoto/TakePhotoButton';
-const FormScreen = ({route,navigation}) => {
+
   const {id, formName} = route.params;
   const formID = uuid.v4();
 
@@ -176,32 +171,7 @@ const FormScreen = ({route,navigation}) => {
     <NativeBaseProvider>
       <SafeAreaView>
         <Center>
-         <Box
-          marginTop={5}
-          maxW="90%"
-          h="100%"
-          _contentContainerStyle={{
-            minW: '90%',
-          }}>
 
-            
-
-        
-        <FlatList
-              
-              data={typeArray}
-              renderItem={(perComponent ) => {
-                  return <DynamicComponent  type={perComponent.item.itemType} options={perComponent.item.itemOptions} valueChange={perComponent.item.func}  />  
-              }}
-          />  
-
-            
-       
-    
-         </Box>
-           
-        
-       
         </Center>
       </SafeAreaView>
     </NativeBaseProvider>

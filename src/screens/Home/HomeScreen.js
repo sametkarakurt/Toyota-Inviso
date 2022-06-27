@@ -78,14 +78,7 @@ export function HomeScreen({navigation}) {
         <Box>
           {(JSON.stringify(netInfo.isConnected) === 'false' ||
             context.mod === true) && <InternetConnection />}
-         
 
-     
-    
-        <Input marginLeft="5" placeholder="Search" width="90%"  borderRadius="4" py="3" px="1" fontSize="14" underlineColorAndroid="transparent" onChangeText={(text) =>searchFilter(text)} />
-
-          
-          <FlatList data={filterData} renderItem={renderForm} />
           
         </Box>
       </SafeAreaView>

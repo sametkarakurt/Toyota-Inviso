@@ -9,20 +9,19 @@ import {
   TouchableOpacity,
   Linking
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
 export default class ScanScreen extends Component {
   onSuccess = e => {
-    console.log(e);
-    this.props.navigation.goBack()
+
   };
 
   render() {
     return (
       <QRCodeScanner
         onRead={this.onSuccess}
+
       />
     );
   }
