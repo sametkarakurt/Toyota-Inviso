@@ -13,9 +13,24 @@ import LanguageScreen from './src/components/LanguageScreen/LanguageScreen';
 import ScanScreen from './src/components/Scanner/Scanner';
 import CameraComponent from './src/components/Camera/Camera';
 import DigitalSignature from './src/components/DigitalSignature/DigitalSignature';
+import TakePhoto from './src/components/TakePhoto/TakePhoto';
+import TakePhotoButton from './src/components/TakePhoto/TakePhotoButton';
+import Video from './src/components/Video/Video';
+import Gallery from './src/components/Gallery/Gallery';
+import TakePhotoCommentButton from './src/components/TakePhotoComment/TakePhotoCommentButton';
+import TakePhotoComment from './src/components/TakePhotoComment/TakePhotoComment';
+import DigitalSignatureButton from './src/components/DigitalSignature/DigitalSignatureButton';
+import {LogBox} from "react-native";
+
+LogBox.ignoreLogs([
+"ViewPropTypes will be removed",
+"ColorPropType will be removed",
+])
 const Stack = createStackNavigator();
 
+
 export default function App({navigation}) {
+  
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -124,6 +139,13 @@ export default function App({navigation}) {
                 <Stack.Screen name="Scanner" component={ScanScreen} />
                 <Stack.Screen name="CameraComponent" component={CameraComponent} />
                 <Stack.Screen name="DigitalSignature" component={DigitalSignature} />
+                <Stack.Screen name="TakePhoto" component={TakePhoto} />
+                <Stack.Screen name="TakePhotoButton" component={TakePhotoButton} />
+                <Stack.Screen name="Video" component={Video} />
+                <Stack.Screen name="Gallery" component={Gallery} />
+                <Stack.Screen name="TakePhotoCommentButton" component={TakePhotoCommentButton} />
+                <Stack.Screen name="TakePhotoComment" component={TakePhotoComment} />
+                <Stack.Screen name="DigitalSignatureButton" component={DigitalSignatureButton} />
               </>
             )}
           </Stack.Navigator>

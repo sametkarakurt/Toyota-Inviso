@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext,useEffect} from 'react';
 import {Text, View} from 'react-native';
 import SelectBox from 'react-native-multi-selectbox';
 import {Context} from '../../store/context';
@@ -13,18 +13,36 @@ import {
   Heading,
 } from 'native-base';
 
+
 const SelectBoxComponent = props => {
   const [selected, setSelected] = useState({});
+  const [data,setData] = useState([])
+  
+  useEffect(() => {
+    setData([])
+    if(!props.data){
+      for(i = 2; i < Object.keys(props.options).length; i++) {
+        const value = String(i);
+        setData(oldArray => [...oldArray, {
+          item: props.options[value].key,
+          id: props.options[value].name,
+        }])
+      }
+    }else{
+      setData(props.data)
+    }
+
+  }, []);
 
   return (
     <NativeBaseProvider>
       <Box marginBottom={5}>
         <VStack space={2}>
           <HStack alignItems="baseline">
-            <Heading fontSize="lg">{props.title}</Heading>
+            <Heading fontSize="lg">SelectBox</Heading>
           </HStack>
           <SelectBox
-            options={props.data}
+            options={data}
             value={selected}
             onChange={val => {
               setSelected(val);

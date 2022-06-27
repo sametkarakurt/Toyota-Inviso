@@ -10,6 +10,7 @@ import {
   View,
   Linking
 } from 'react-native';
+import {Button} from 'native-base';
 import { withNavigation } from 'react-navigation';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
@@ -26,9 +27,9 @@ export default class CameraComponent extends Component {
     return (
       <View>
 
-    <TouchableOpacity onPress={this.start}>
-      <Text>Start</Text>
-    </TouchableOpacity>
+    <Button onPress={this.start}>
+      RECORD VIDEO
+    </Button>
     <VideoRecorder ref={(ref) => { this.videoRecorder = ref; }} />
   </View>
     );

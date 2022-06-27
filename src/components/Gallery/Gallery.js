@@ -1,6 +1,6 @@
  
 // Import React
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 // Import core components
 import {
   StyleSheet,
@@ -13,7 +13,7 @@ import {
   Button,
   Center,
 } from 'native-base';
- 
+import { useNavigation } from '@react-navigation/native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
  const options = {
     title: `Select Image or Video\n(mixed)`,
@@ -25,25 +25,24 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
   }
 const Gallery = () => {
 
- 
+
+
+
+  const navigation = useNavigation(); 
+  useEffect(() => {
+     
   const openGallery = async () => {
     const result = await launchImageLibrary(options);
-    console.log(result)
-  }
+    navigation.pop(2)
 
-  return (
-    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-    <Button
-          w="90%"
-          onPress={() => {
-            openGallery();
-          }}>
-          Gallery
-        </Button>
-    </View>
-  );
+  }
+    openGallery();
+
+  }, []);
+
+  return null;
 };
  
 
  
-export default Gallery
+export default Gallery;

@@ -1,21 +1,14 @@
+import { border } from "native-base/lib/typescript/theme/styled-system";
 import React, { useState } from "react";
-import { Button, Platform, StyleSheet, Switch, Text, View } from "react-native";
+import {  Platform, StyleSheet,View,Pressable } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const App = () => {
   const [pickerMode, setPickerMode] = useState(null);
   const [inline, setInline] = useState(false);
+  const [date, setDate] = useState(null);
 
   const showDatePicker = () => {
     setPickerMode("date");
-  };
-
-  const showTimePicker = () => {
-    setPickerMode("time");
-  };
-
-  const showDateTimePicker = () => {
-    setPickerMode("datetime");
   };
 
   const hidePicker = () => {
@@ -25,25 +18,66 @@ const App = () => {
   const handleConfirm = (date) => {
     // In order to prevent the double-shown popup bug on Android, picker has to be hidden first (https://github.com/react-native-datetimepicker/datetimepicker/issues/54#issuecomment-618776550)
     hidePicker();
-    console.warn("A date has been picked: ", date);
+    var tempDate = JSON.stringify(date);
+    var year = "";
+    var month = "";
+    var day = "";
+    for(i = 1; i < 5; i++) {
+      year += tempDate[i]
+    }
+
+
+    for(i = 6; i < 8; i++) {
+      month += tempDate[i]
+    }
+
+    for(i = 9; i < 11; i++) {
+      day += tempDate[i]
+    }
+
+    day++;
+    day = String(day);
+
+
+    var tempDate = day + "-" + month + "-" + year;
+    setDate(tempDate);
+
+
+
   };
 
   return (
-    <View style={style.root}>
-      <Button title="Show Date Picker" onPress={showDatePicker} />
- 
-      <DateTimePickerModal
+
+    <NativeBaseProvider>
+    <Box marginBottom={5}>
+      <VStack space={2}>
+        <HStack alignItems="baseline">
+          <Heading fontSize="lg">Date</Heading>
+        </HStack>
+        <Pressable  onPress={showDatePicker}>
+        <View  pointerEvents="none">
+          <Input placeholder={date}/>
+        </View>
+        </Pressable>
+             <DateTimePickerModal
         isVisible={pickerMode !== null}
         mode={pickerMode}
         onConfirm={handleConfirm}
         onCancel={hidePicker}
         display={inline ? "inline" : undefined}
       />
-    </View>
+      </VStack>
+    </Box>
+  </NativeBaseProvider>
+   
   );
 };
 
 const style = StyleSheet.create({
+  kara: {
+    backgroundColor: 'red',
+
+  },
   root: {
     flex: 1,
     justifyContent: "center",
@@ -60,4 +94,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default App;
+
