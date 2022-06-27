@@ -23,8 +23,6 @@ target 'toyotaInviso' do
   )
 
 
-
-
   target 'toyotaInvisoTests' do
     inherit! :complete
     # Pods for testing

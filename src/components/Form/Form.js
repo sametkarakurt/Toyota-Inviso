@@ -15,11 +15,7 @@ import InputNumber from '../InputNumber/InputNumber';
 import Gallery from '../Gallery/Gallery';
 import Video from '../Video/Video';
 import uuid from 'react-native-uuid';
-import DateComponent from '../Date/Date';
-import Location from '../Location/Location';
-import DynamicComponent from '../DynamicComponent/DynamicComponent';
-import axios from 'axios';
-const FormScreen = ({route,navigation}) => {
+
   const {id, formName} = route.params;
   const formID = uuid.v4();
 
@@ -164,13 +160,6 @@ const FormScreen = ({route,navigation}) => {
             _contentContainerStyle={{
               minW: '90%',
             }}>
-
-            {typeArray.map(perComponent => (  
-          <DynamicComponent type={perComponent} />  
-             
-       
-        ))}  
-        
           </ScrollView>
         </Center>
       </SafeAreaView>

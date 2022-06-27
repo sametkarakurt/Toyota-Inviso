@@ -50,10 +50,7 @@ export function HomeScreen({navigation}) {
             <Text style={styles.buttonText}>Search Form</Text>
           </Pressable>
           <FlatList data={data} renderItem={renderForm} />
-          <FormCard
-            form={renderForm}
-            onSelect={() => handleFormSelect(renderForm.id, renderForm.name)}
-          />
+
           
         </Box>
       </SafeAreaView>
