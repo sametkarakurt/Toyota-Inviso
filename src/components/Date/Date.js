@@ -2,18 +2,7 @@ import { border } from "native-base/lib/typescript/theme/styled-system";
 import React, { useState } from "react";
 import {  Platform, StyleSheet,View,Pressable } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import {
-  Checkbox,
-  Heading,
-  HStack,
-  VStack,
-  Text,
-  Box,
-  Center,
-  NativeBaseProvider,
-  Input,
-} from 'native-base';
-const DateComponent = () => {
+
   const [pickerMode, setPickerMode] = useState(null);
   const [inline, setInline] = useState(false);
   const [date, setDate] = useState(null);
@@ -105,4 +94,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default DateComponent;
+

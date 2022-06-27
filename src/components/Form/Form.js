@@ -16,6 +16,7 @@ import Gallery from '../Gallery/Gallery';
 import Video from '../Video/Video';
 import uuid from 'react-native-uuid';
 
+
   const {id, formName} = route.params;
   const formID = uuid.v4();
 
