@@ -11,8 +11,9 @@ import {
   Center,
   NativeBaseProvider,
 } from 'native-base';
-
+import {useTranslation} from 'react-i18next';
 const InternetConnection = () => {
+  const {t, i18n} = useTranslation();
   return (
     <Center marginY={5}>
       <Stack space={3} w="90%">
@@ -26,7 +27,7 @@ const InternetConnection = () => {
                 justifyContent="space-between">
                 <HStack space={2} flexShrink={1} alignItems="center">
                   <Alert.Icon />
-                  <Text color={'warmGray.50'}>İnternet Bağlantısı Yok!</Text>
+                  <Text color={'warmGray.50'}>{t('internet')}</Text>
                 </HStack>
               </HStack>
             </VStack>

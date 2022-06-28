@@ -18,7 +18,10 @@ import Location from '../Location/Location';
 import DynamicComponent from '../DynamicComponent/DynamicComponent';
 import data from '/Users/sametkarakurt/myProject/db.json';
 import {LogBox} from 'react-native';
-LogBox.ignoreLogs(['new NativeEventEmitter']);
+LogBox.ignoreLogs([
+  'new NativeEventEmitter',
+  'Non-serializable values were found in the navigation state',
+]);
 const FormScreen = ({route, navigation}) => {
   const {id, formName} = route.params;
   const formID = uuid.v4();
@@ -160,7 +163,6 @@ const FormScreen = ({route, navigation}) => {
   ];
 
   useEffect(() => {
-    console.log(route);
     setTypeArray([]);
     const fetchData = async () => {
       data.data[0].pages[0].forms.forEach(items => {

@@ -1,50 +1,49 @@
-import React, {useState, useContext,useEffect} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Text, View} from 'react-native';
 import SelectBox from '../SelectBox/SelectBox';
 import {NativeBaseProvider, Center, ScrollView, Box} from 'native-base';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import styles from './styles';
 import {Context} from '../../store/context';
+import {useTranslation} from 'react-i18next';
 const languageOptions = [
   {
-    item: 'English',
+    item: '',
     id: 'en',
   },
   {
-    item: 'Türkçe',
+    item: '',
     id: 'tr',
   },
 ];
 const LanguageScreen = props => {
+  const {t, i18n} = useTranslation();
   const context = useContext(Context);
-  const [language,setLanguage] = useState();
+  const [language, setLanguage] = useState();
 
   useEffect(() => {
-    languageOptions.map((item) => {
-      if(item.id == context.language){
-        setLanguage(item.item)
+    languageOptions[0].item = t('english');
+    languageOptions[1].item = t('turkish');
+    languageOptions.map(item => {
+      if (item.id == context.language) {
+        setLanguage(item.item);
       }
-    })
+    });
   }, []);
 
   return (
     <NativeBaseProvider>
       <Center>
-      <Box
-        marginTop={5}
-        minW="90%"
-        maxW="90%"
-        h="100%"
-       >
-        <SelectBox
-          title={'Dil'}
-          value={language}
-          data={languageOptions}
-          valueChange={language => {
-            context.changeLanguage(language.id);
-          }}
-        />
-      </Box>
+        <Box marginTop={5} minW="90%" maxW="90%" h="100%">
+          <SelectBox
+            title={'Dil'}
+            value={language}
+            data={languageOptions}
+            valueChange={language => {
+              context.changeLanguage(language.id);
+            }}
+          />
+        </Box>
       </Center>
     </NativeBaseProvider>
   );

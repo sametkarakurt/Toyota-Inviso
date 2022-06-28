@@ -8,7 +8,7 @@ import InternetConnection from '../../components/InternetAlert/InternetConnectio
 import FormCard from '../../components/FormCard/FormCard';
 import DropdownAlert from 'react-native-dropdownalert';
 import {NativeBaseProvider, Box} from 'native-base';
-
+import {useTranslation} from 'react-i18next';
 import {Context} from '../../store/context';
 
 export function HomeScreen({navigation}) {
@@ -17,7 +17,7 @@ export function HomeScreen({navigation}) {
   const [masterData, setMasterData] = useState([]);
 
   const [search, setSearch] = useState(null);
-
+  const {t, i18n} = useTranslation();
   const context = useContext(Context);
 
   const handleFormSelect = (id, formName) => {
@@ -62,11 +62,11 @@ export function HomeScreen({navigation}) {
   };
 
   const saveData = () => {
-    dropDownAlertRef.alertWithType('success', 'Veriler Kaydedildi');
+    dropDownAlertRef.alertWithType('success', t('saveAlert'));
   };
 
   const sendData = () => {
-    dropDownAlertRef.alertWithType('success', 'Veriler Gönderildi');
+    dropDownAlertRef.alertWithType('success', t('sendAlert'));
   };
 
   return (
@@ -85,7 +85,7 @@ export function HomeScreen({navigation}) {
             </View>
 
             <TextInput
-              placeholder="Search"
+              placeholder={t('search')}
               style={styles.textInput}
               onChangeText={text => searchFilter(text)}
             />
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     height: 45,
     flexDirection: 'row',
+    borderRadius: 5,
   },
   container: {
     backgroundColor: '#E8EAED',

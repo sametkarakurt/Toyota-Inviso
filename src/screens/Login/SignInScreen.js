@@ -23,6 +23,7 @@ import {LogBox} from 'react-native';
 
 LogBox.ignoreLogs([
   'Sending `onAnimatedValueUpdate` with no listeners registered.',
+  'Failed prop type: Invalid prop `confirmText` of type `object` supplied to `AwesomeAlert`, expected `string`',
 ]);
 
 export function SignInScreen() {

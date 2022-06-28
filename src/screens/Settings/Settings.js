@@ -10,23 +10,30 @@ import {
   VStack,
   Heading,
   Box,
+  Button,
 } from 'native-base';
 import Clipboard from '@react-native-community/clipboard';
 import {useToast} from 'react-native-toast-notifications';
-
+import {AuthContext} from '../utily';
 import InternetConnection from '../../components/InternetAlert/InternetConnection';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Octicons from 'react-native-vector-icons/Octicons';
 import {Context} from '../../store/context';
 import {useNetInfo} from '@react-native-community/netinfo';
 
 import {useTranslation} from 'react-i18next';
 const SettingsScreen = ({navigation}) => {
+  const {signOut} = React.useContext(AuthContext);
   const context = useContext(Context);
   const toast = useToast();
   const netInfo = useNetInfo();
   function toggle() {
     context.toggleOfflineMod();
   }
+
+  const exit = () => {
+    signOut();
+  };
 
   const {t, i18n} = useTranslation();
 
@@ -76,6 +83,21 @@ const SettingsScreen = ({navigation}) => {
                 }}>
                 <View style={styles.item}>
                   <Text fontSize="md">{t('appSettings')}</Text>
+                  <Entypo name="chevron-right" size={20} />
+                </View>
+              </TouchableOpacity>
+              <Divider my="2" />
+            </View>
+            <View style={styles.row}>
+              <TouchableOpacity onPress={exit}>
+                <View style={styles.item}>
+                  <HStack>
+                    <Octicons name="sign-out" size={24} />
+                    <Text marginLeft={3} fontSize="md">
+                      {t('exit')}
+                    </Text>
+                  </HStack>
+
                   <Entypo name="chevron-right" size={20} />
                 </View>
               </TouchableOpacity>

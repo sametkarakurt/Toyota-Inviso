@@ -3,9 +3,18 @@ import {Alert} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import {Context} from '../src/store/context';
+import Entypo from 'react-native-vector-icons/Entypo';
 const DeviceId = () => {
   const context = useContext(Context);
   const [showAlert, setShowAlert] = useState(true);
+  const [showProgress, setShowProgess] = useState(true);
+
+  const handleButton = () => {
+    setShowAlert(false);
+  };
+  useEffect(() => {
+    setTimeout(handleButton, 3000);
+  }, []);
 
   const hideAlert = () => {
     setShowAlert(false);
@@ -13,12 +22,10 @@ const DeviceId = () => {
   return (
     <AwesomeAlert
       show={showAlert}
-      showProgress={true}
+      showProgress={showProgress}
       message={context.deviceID}
       closeOnTouchOutside={false}
       closeOnHardwareBackPress={false}
-      showConfirmButton={true}
-      confirmText="OK"
       contentContainerStyle={{width: 250}}
       messageStyle={{fontSize: 20, marginTop: 15}}
       confirmButtonColor="#DD6B55"

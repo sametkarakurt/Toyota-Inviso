@@ -28,14 +28,11 @@ const OfflineScreen = ({navigation}) => {
   const netInfo = useNetInfo();
 
   const saveData = () => {
-    dropDownAlertRef.alertWithType('success', 'Veriler Kaydedildi');
+    dropDownAlertRef.alertWithType('success', t('saveAlert'));
   };
 
   const sendData = () => {
-    dropDownAlertRef.alertWithType(
-      'success',
-      'Veriler Gönderildi.Sayfayı Yenileyiniz.',
-    );
+    dropDownAlertRef.alertWithType('success', t('refreshAlert'));
   };
   const postData = async () => {
     if (

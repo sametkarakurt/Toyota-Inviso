@@ -14,6 +14,7 @@
     "language": "Dil",
     "appSettings": "Resim ve Uygulama Ayarları",
     "uuid": "Cihaz UUID",
+    "exit": "Çıkış",
     //Ofline
     "barcode": "Barkod",
     "form": "Form",
@@ -27,6 +28,19 @@
     "quality": "Çözünürlük",
     "camera": "Kamera",
     "high": "Yüksek",
-    "low": "Düşük"
+    "low": "Düşük",
+    //Language Options
+    "turkish": "Türkçe",
+    "english": "İngilizce",
+    //Internet Connection
+    "internet": "İnternet Bağlantısı Yok",
+    //Search Bar
+    "search": "Ara",
+    //My Tasks
+    "taskWarning": "Atanmış Göreviniz Bulunmamaktadır.",
+    //Alert
+    "saveAlert": "Veriler Kaydedildi.",
+    "sendAlert": "Veriler Gönderildi.",
+    "refreshAlert": "Veriler Gönderildi. Sayfayı Yenileyin."
   }
 }

@@ -68,21 +68,8 @@ export default function App({navigation}) {
   );
 
   React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let userToken;
-
-      try {
-        // Restore token stored in `SecureStore` or any other encrypted storage
-        // userToken = await SecureStore.getItemAsync('userToken');
-      } catch (e) {
-        // Restoring token failed
-      }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
       dispatch({type: 'RESTORE_TOKEN', token: userToken});
     };
 
@@ -92,20 +79,10 @@ export default function App({navigation}) {
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
-        // In a production app, we need to send some data (usually username, password) to server and get a token
-        // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
-        // In the example, we'll use a dummy token
-
         dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
       },
       signOut: () => dispatch({type: 'SIGN_OUT'}),
       signUp: async data => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
-        // In the example, we'll use a dummy token
-
         dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
       },
     }),
@@ -139,48 +116,91 @@ export default function App({navigation}) {
                   <Stack.Screen
                     name="Formlar"
                     component={HomeTabNavigator}
-                    options={{headerShown: false}}
+                    options={{headerShown: false, title: ''}}
                   />
-                  <Stack.Screen name="Form" component={FormScreen} />
-                  <Stack.Screen name="Language" component={LanguageScreen} />
-                  <Stack.Screen name="Scanner" component={ScanScreen} />
-                  <Stack.Screen name="TakeVideo" component={TakeVideo} />
+                  <Stack.Screen
+                    name="Form"
+                    component={FormScreen}
+                    options={{title: ''}}
+                  />
+                  <Stack.Screen
+                    name="Language"
+                    component={LanguageScreen}
+                    options={{title: ''}}
+                  />
+                  <Stack.Screen
+                    name="Scanner"
+                    component={ScanScreen}
+                    options={{title: ''}}
+                  />
+                  <Stack.Screen
+                    name="TakeVideo"
+                    component={TakeVideo}
+                    options={{title: ''}}
+                  />
                   <Stack.Screen
                     name="DigitalSignature"
                     component={DigitalSignature}
+                    options={{title: ''}}
                   />
-                  <Stack.Screen name="TakePhoto" component={TakePhoto} />
+                  <Stack.Screen
+                    name="TakePhoto"
+                    component={TakePhoto}
+                    options={{title: ''}}
+                  />
                   <Stack.Screen
                     name="TakePhotoButton"
                     component={TakePhotoButton}
+                    options={{title: ''}}
                   />
-                  <Stack.Screen name="Photo" component={Photo} />
-                  <Stack.Screen name="Gallery" component={Gallery} />
+                  <Stack.Screen
+                    name="Photo"
+                    component={Photo}
+                    options={{title: ''}}
+                  />
+                  <Stack.Screen
+                    name="Gallery"
+                    component={Gallery}
+                    options={{title: ''}}
+                  />
                   <Stack.Screen
                     name="TakePhotoCommentButton"
                     component={TakePhotoCommentButton}
+                    options={{title: ''}}
                   />
                   <Stack.Screen
                     name="TakePhotoComment"
                     component={TakePhotoComment}
+                    options={{title: ''}}
                   />
                   <Stack.Screen
                     name="DigitalSignatureButton"
                     component={DigitalSignatureButton}
+                    options={{title: ''}}
                   />
-                  <Stack.Screen name="OfflineForm" component={OfflineForm} />
+                  <Stack.Screen
+                    name="OfflineForm"
+                    component={OfflineForm}
+                    options={{title: ''}}
+                  />
                   <Stack.Screen
                     name="OfflineScreen"
                     component={OfflineScreen}
+                    options={{title: ''}}
                   />
                   <Stack.Screen
                     name="TakeVideoButton"
                     component={TakeVideoButton}
+                    options={{title: ''}}
                   />
-                  <Stack.Screen name="SelectVideo" component={SelectVideo} />
+                  <Stack.Screen
+                    name="SelectVideo"
+                    component={SelectVideo}
+                    options={{title: ''}}
+                  />
                   <Stack.Screen
                     name="AppSettings"
-                    options={{title: 'Resim ve Uygulama Ayarları'}}
+                    options={{title: ''}}
                     component={AppSettings}
                   />
                   <Stack.Screen

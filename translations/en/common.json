@@ -14,6 +14,7 @@
     "language": "Language",
     "appSettings": "Picture and Application Settings",
     "uuid": "Device UUID",
+    "exit": "Sign Out",
     //Ofline
     "barcode": "Barcode",
     "form": "Form",
@@ -27,6 +28,19 @@
     "quality": "Quality",
     "camera": "Camera",
     "high": "High",
-    "low": "Low"
+    "low": "Low",
+    //Language Options
+    "turkish": "Turkish",
+    "english": "English",
+    //Internet Connection
+    "internet": "Internet Connection Not Avaliable",
+    //Search Bar
+    "search": "Search",
+    //My Tasks
+    "taskWarning": "You Don't Have Assigned Taks.",
+    //Alert
+    "saveAlert": "Data Saved.",
+    "sendAlert": "Data Sent.",
+    "refreshAlert": "Data Sent. Refresh The Page."
   }
 }
