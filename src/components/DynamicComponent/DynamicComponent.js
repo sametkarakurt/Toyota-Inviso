@@ -2,7 +2,7 @@ import React, {useState, useEffect, createElement} from 'react';
 import RadioButtonComponent from '../RadioButton/RadioButtonComponent';
 import TextAreaComponent from '../TextArea/TextAreaComponent';
 import Config from 'react-native-config';
-import useFetch from '../../hooks/useFetch/useFetch';
+
 import SelectBox from '../SelectBox/SelectBox';
 import CheckBox from '../CheckBox/CheckBox';
 import MultiSelect from '../MultiSelect/MultiSelect';
@@ -18,6 +18,7 @@ import ScannerButton from '../Scanner/ScannerButton';
 import DigitalSignatureButton from '../DigitalSignature/DigitalSignatureButton';
 
 const DynamicComponent = props => {
+  //All Components
   const Components = {
     numberComponent: InputNumber,
     dateComponent: DateComponent,
@@ -34,7 +35,7 @@ const DynamicComponent = props => {
     signatureComponent: DigitalSignatureButton,
     submitButton: SubmitButons,
   };
-
+  //Create Component
   if (typeof props.type !== 'undefined') {
     return React.createElement(Components[props.type], {
       options: props.options,

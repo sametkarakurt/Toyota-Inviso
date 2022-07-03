@@ -1,28 +1,10 @@
 import 'react-native-gesture-handler';
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Dimensions,
-  Image,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
-import {
-  NativeBaseProvider,
-  Radio,
-  HStack,
-  Heading,
-  Button,
-  Box,
-  Center,
-  VStack,
-} from 'native-base';
+import React, {useEffect} from 'react';
+import {SafeAreaView, Alert} from 'react-native';
+import {NativeBaseProvider, HStack, Button, Box, Center} from 'native-base';
 import VideoPlayer from 'react-native-video-player';
 import {useNavigation} from '@react-navigation/native';
+
 const VideoDetail = props => {
   const navigation = useNavigation();
   useEffect(() => {}, []);

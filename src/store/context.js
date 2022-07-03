@@ -1,14 +1,17 @@
 import React, {createContext, useState} from 'react';
 import DeviceInfo from 'react-native-device-info';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+
 export const Context = createContext({
   offlineMod: false,
   deviceID: '',
+  username: '',
   language: 'tr',
   photoResolution: 0.4,
   cameraResolution: 0.5,
   keys: [],
   toggleOfflineMod: () => {},
+  changeUsername: () => {},
 });
 
 function ContextProvider({children}) {
@@ -26,8 +29,9 @@ function ContextProvider({children}) {
     }
   });
   const [offlineMod, setOfflineMod] = useState(false);
-  const [deviceID, setDeviceID] = useState(exp2);
+  const [deviceID, setDeviceID] = useState(exp2.toUpperCase());
   const [language, setLanguage] = useState('tr');
+  const [username, setUsername] = useState('');
   const [photoResolution, setPhotoResolution] = useState(0.4);
   const [cameraResolution, setCameraResolution] = useState(0.5);
   const [keys, setKey] = useState([]);
@@ -38,23 +42,29 @@ function ContextProvider({children}) {
   function changePhotoResolution(value) {
     setPhotoResolution(value);
   }
-  
+
   function changeCameraResolution(value) {
     setCameraResolution(value);
   }
 
   function changeLanguage(language) {
     setLanguage(language);
-    i18n.changeLanguage(language)
+    i18n.changeLanguage(language);
+  }
+
+  function changeUsername(username) {
+    setUsername(username);
   }
 
   function changeKey(key) {
-    setKey(oldArray => [...oldArray, key])
+    setKey(oldArray => [...oldArray, key]);
   }
 
   const value = {
     mod: offlineMod,
     language: language,
+    username: username,
+    changeUsername: changeUsername,
     keys: keys,
     changeKey: changeKey,
     cameraResolution: cameraResolution,

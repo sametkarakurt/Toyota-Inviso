@@ -1,39 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
-import RadioButtonComponent from '../RadioButton/RadioButtonComponent';
-import TextAreaComponent from '../TextArea/TextAreaComponent';
-import {
-  NativeBaseProvider,
-  Center,
-  ScrollView,
-  Button,
-  Box,
-  FlatList,
-} from 'native-base';
-import styles from './style';
-import Config from 'react-native-config';
-import useFetch from '../../hooks/useFetch/useFetch';
-import SelectBox from '../SelectBox/SelectBox';
-import CheckBox from '../CheckBox/CheckBox';
-import MultiSelect from '../MultiSelect/MultiSelect';
-import SubmitButons from '../SubmitButons/SubmitButons';
-import InputEmail from '../InputEmail/InputEmail';
-import InputNumber from '../InputNumber/InputNumber';
-import Gallery from '../Gallery/Gallery';
-import Photo from '../Photo/Photo';
+import {SafeAreaView} from 'react-native';
+import {NativeBaseProvider, Center, Box, FlatList} from 'native-base';
 import uuid from 'react-native-uuid';
-import DateComponent from '../Date/Date';
-import Location from '../Location/Location';
 import DynamicComponent from '../DynamicComponent/DynamicComponent';
-import axios from 'axios';
-import TakePhotoButton from '../TakePhoto/TakePhotoButton';
-import data from '/Users/sametkarakurt/myProject/db.json';
+
 const OfflineForm = ({route, navigation}) => {
   const {id, formName} = route.params;
   const formID = uuid.v4();
 
+  //Saved form data
   const [formData, setFormData] = useState(route.params.formData[0]);
 
+  //Functions to change the form data
   const numberInputChange = text => {
     setFormData({...formData, numberComponent: text});
   };
@@ -112,13 +90,11 @@ const OfflineForm = ({route, navigation}) => {
 
   const item = route.params.formData;
 
-  useEffect(() => {
-    console.log(route.params.sendData);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <NativeBaseProvider>
-      <SafeAreaView>
+      <SafeAreaView style={{backgroundColor: '#E8EAED'}}>
         <Center>
           <Box marginTop={5} minW="100%" maxW="100%" h="100%">
             <FlatList

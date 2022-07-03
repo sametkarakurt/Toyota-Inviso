@@ -1,24 +1,20 @@
-import React, { useState,useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   TextArea,
   HStack,
   Heading,
   Box,
-  Center,
   VStack,
   NativeBaseProvider,
 } from 'native-base';
-import {Text, View} from 'react-native';
+
 const TextAreaComponent = props => {
-  const [formValue,setFormValue] = useState()
+  const [formValue, setFormValue] = useState();
 
   useEffect(() => {
-   
-    if(props.formData.textAreaComponent){
-      setFormValue(props.formData.textAreaComponent)
+    if (props.formData.textAreaComponent) {
+      setFormValue(props.formData.textAreaComponent);
     }
-
-
   }, []);
   return (
     <NativeBaseProvider>
@@ -28,12 +24,14 @@ const TextAreaComponent = props => {
             <Heading fontSize="lg">Text Area</Heading>
           </HStack>
           <TextArea
+            backgroundColor={'white'}
             placeholder={props.options[0].key}
             w="100%"
+            h="100"
             value={formValue}
             onChangeText={text => {
               setFormValue(text);
-              props.valueChange(text)
+              props.valueChange(text);
             }}
           />
         </VStack>

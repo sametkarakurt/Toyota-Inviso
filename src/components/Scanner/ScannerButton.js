@@ -1,16 +1,10 @@
 import React from 'react';
 import {
-  Checkbox,
-  Heading,
   HStack,
-  VStack,
-  Text,
   Box,
-  Center,
   NativeBaseProvider,
   Input,
   Button,
-  TouchableOpacity,
   View,
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
@@ -21,7 +15,12 @@ const ScannerButton = props => {
       <Box marginBottom={5}>
         <HStack w="100%" justifyContent={'space-between'}>
           <View pointerEvents="none">
-            <Input value={props.formData.scannerComponent} h="10" w="1000%" />
+            <Input
+              backgroundColor={'white'}
+              value={props.formData.scannerComponent}
+              h="10"
+              w="1000%"
+            />
           </View>
 
           <Button

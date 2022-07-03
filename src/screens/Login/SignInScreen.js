@@ -1,51 +1,52 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
 import {AuthContext} from '../utily';
 import 'react-native-gesture-handler';
-import {useState} from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   Image,
   SafeAreaView,
   TouchableOpacity,
-  StatusBar,
   Dimensions,
-  Alert,
 } from 'react-native';
-
-import DeviceId from '../../../pages/DeviceId';
+import DeviceId from '../../components/DeviceID/DeviceId';
 import {useTranslation} from 'react-i18next';
-
+import {Context} from '../../store/context';
 import {LogBox} from 'react-native';
 
 LogBox.ignoreLogs([
   'Sending `onAnimatedValueUpdate` with no listeners registered.',
-  'Failed prop type: Invalid prop `confirmText` of type `object` supplied to `AwesomeAlert`, expected `string`',
+  'Failed prop type',
 ]);
 
 export function SignInScreen() {
+  const context = useContext(Context);
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
-
+  const [passwordWrong, setPasswordWrong] = React.useState(false);
   const {signIn} = React.useContext(AuthContext);
 
   const {t, i18n} = useTranslation();
 
   function handleSubmit() {
-    signIn({username, password});
+    signIn({username, password, setPassword});
+    //Save username
+    context.changeUsername(username);
   }
   return (
     <View style={styles.container}>
       <DeviceId />
       <Image
-        source={require('/Users/sametkarakurt/myProject/images/logo3.png')}
+        source={require('../../../assets/images/logo.png')}
         style={styles.backImage}
       />
       <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
+        {passwordWrong && (
+          <Text style={styles.warning}>{t('passwordWarning')}</Text>
+        )}
         <TextInput
           style={styles.input}
           autoCapitalize="none"
@@ -53,7 +54,7 @@ export function SignInScreen() {
           textContentType="emailAddress"
           placeholder={t('username')}
           autoFocus={true}
-          onChangeText={text => setPassword(text)}
+          onChangeText={text => setUsername(text)}
         />
         <TextInput
           style={styles.input}
@@ -100,6 +101,12 @@ const styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center',
     paddingBottom: 24,
+  },
+  warning: {
+    textAlign: 'center',
+    color: 'white',
+    marginBottom: 20,
+    fontSize: 16,
   },
   input: {
     backgroundColor: '#F6F7FB',

@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
-
-import TextAreaComponent from '../TextArea/TextAreaComponent';
-import {NativeBaseProvider, Radio, Heading} from 'native-base';
 import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './styles';
+
 const FormCard = ({form, onSelect}) => {
   return (
     <View style={styles.row}>

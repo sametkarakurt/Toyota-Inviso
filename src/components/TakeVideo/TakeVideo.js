@@ -1,36 +1,18 @@
-'use strict';
-
 import React, {useRef, useContext} from 'react';
-
-import {
-  AppRegistry,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Linking,
-} from 'react-native';
-import {
-  NativeBaseProvider,
-  HStack,
-  Switch,
-  Divider,
-  Text,
-  VStack,
-  Heading,
-  Box,
-} from 'native-base';
+import {TouchableOpacity, View} from 'react-native';
+import {NativeBaseProvider, Divider, Text, Box} from 'native-base';
 import styles from './styles';
-
 import VideoRecorder from 'react-native-beautiful-video-recorder';
 import {useNavigation} from '@react-navigation/native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Context} from '../../store/context';
+
 const TakeVideo = props => {
   const cameraRef = useRef(null);
   const navigation = useNavigation();
   const context = useContext(Context);
   const start = async () => {
-    // 30 seconds
+
     cameraRef.current.open(
       {maxLength: 30, quality: context.cameraResolution},
       data => {

@@ -10,7 +10,6 @@ import {
   VStack,
   Heading,
   Box,
-  Button,
 } from 'native-base';
 import Clipboard from '@react-native-community/clipboard';
 import {useToast} from 'react-native-toast-notifications';
@@ -20,9 +19,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {Context} from '../../store/context';
 import {useNetInfo} from '@react-native-community/netinfo';
-
 import {useTranslation} from 'react-i18next';
+
 const SettingsScreen = ({navigation}) => {
+  const {t, i18n} = useTranslation();
   const {signOut} = React.useContext(AuthContext);
   const context = useContext(Context);
   const toast = useToast();
@@ -35,11 +35,9 @@ const SettingsScreen = ({navigation}) => {
     signOut();
   };
 
-  const {t, i18n} = useTranslation();
-
   const copyItem = item => {
     Clipboard.setString(item);
-    toast.show('Kopyalandı', {placement: 'center', duration: 750});
+    toast.show([t('copy')], {placement: 'center', duration: 750});
   };
   return (
     <NativeBaseProvider>
@@ -56,8 +54,15 @@ const SettingsScreen = ({navigation}) => {
             }
             paddingX={5}>
             <Heading size="2xl">{t('settings')}</Heading>
+            <Heading
+              marginBottom={4}
+              marginTop={4}
+              style={styles.item}
+              size="sm">
+              {t('welcome')} {context.username}
+            </Heading>
             <HStack
-              marginTop={8}
+              style={styles.item}
               alignItems="center"
               justifyContent="space-between">
               <Text fontSize="md">{t('offlineMode')}</Text>

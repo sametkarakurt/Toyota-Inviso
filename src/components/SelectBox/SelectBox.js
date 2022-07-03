@@ -1,17 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import SelectBox from 'react-native-multi-selectbox';
-import {Context} from '../../store/context';
-import {xorBy} from 'lodash';
-import {
-  TextArea,
-  Box,
-  Center,
-  NativeBaseProvider,
-  VStack,
-  HStack,
-  Heading,
-} from 'native-base';
 
 const SelectBoxComponent = props => {
   const [selected, setSelected] = useState({});

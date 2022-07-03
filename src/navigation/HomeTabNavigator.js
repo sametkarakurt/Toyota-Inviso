@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {HomeScreen} from '../screens/Home/HomeScreen';
 import SettingsScreen from '../screens/Settings/Settings';
-import MissionsScreen from '../screens/Missions/MissionsScreen'
+import MissionsScreen from '../screens/Missions/MissionsScreen';
 import OfflineScreen from '../screens/Offline/OfflineScreen';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+
 const Tab = createMaterialBottomTabNavigator();
 
 const HomeTabNavigator = () => {

@@ -26,7 +26,6 @@ target 'toyotaInviso' do
 
 
 
-  pod 'RNCClipboard', :path => '../node_modules/@react-native-community/clipboard'
 
   target 'toyotaInvisoTests' do
     inherit! :complete

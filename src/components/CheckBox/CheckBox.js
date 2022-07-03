@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Checkbox,
   Heading,
@@ -11,24 +11,23 @@ import {
 } from 'native-base';
 const CheckBox = props => {
   const [groupValue, setGroupValue] = useState([]);
-  const [data,setData] = useState([])
+  const [data, setData] = useState([]);
   useEffect(() => {
-    
-    setData([])
-    for(i = 2; i < Object.keys(props.options).length; i++) {
+    setData([]);
+    for (i = 2; i < Object.keys(props.options).length; i++) {
       const value = String(i);
-      setData(oldArray => [...oldArray, {
-        item: props.options[value].key,
-        id: props.options[value].name,
-      }])
-
+      setData(oldArray => [
+        ...oldArray,
+        {
+          item: props.options[value].key,
+          id: props.options[value].name,
+        },
+      ]);
     }
 
-    if(props.formData.chechBoxComponent){
-      setGroupValue(props.formData.chechBoxComponent)
+    if (props.formData.chechBoxComponent) {
+      setGroupValue(props.formData.chechBoxComponent);
     }
-
-
   }, []);
   return (
     <NativeBaseProvider>
@@ -46,12 +45,13 @@ const CheckBox = props => {
               setGroupValue(values || []);
               props.valueChange(values);
             }}>
-
-            {data.map((item)=>{
-         return  <Checkbox value={item.id} key={item.id} my="1">
-         {item.item}
-       </Checkbox>
-     })}
+            {data.map(item => {
+              return (
+                <Checkbox value={item.id} key={item.id} my="1">
+                  {item.item}
+                </Checkbox>
+              );
+            })}
           </Checkbox.Group>
         </VStack>
       </Box>

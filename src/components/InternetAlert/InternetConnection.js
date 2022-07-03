@@ -1,16 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {View, SafeAreaView} from 'react-native';
+import React from 'react';
 
-import {
-  Stack,
-  Alert,
-  HStack,
-  VStack,
-  Text,
-  Divider,
-  Center,
-  NativeBaseProvider,
-} from 'native-base';
+import {Stack, Alert, HStack, VStack, Text, Center} from 'native-base';
 import {useTranslation} from 'react-i18next';
 const InternetConnection = () => {
   const {t, i18n} = useTranslation();

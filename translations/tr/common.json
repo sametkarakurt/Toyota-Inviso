@@ -5,7 +5,7 @@
     "password": "Şifre",
     "login": "Giriş Yap",
     //Navigator
-    "homePage": "Anasayfa",
+    "homePage": "Formlar",
     "missions": "Görevler",
     "offlinePage": "Çevrimdışı",
     //Settings Page
@@ -15,6 +15,7 @@
     "appSettings": "Resim ve Uygulama Ayarları",
     "uuid": "Cihaz UUID",
     "exit": "Çıkış",
+    "welcome": "Hoşgeldiniz, ",
     //Ofline
     "barcode": "Barkod",
     "form": "Form",
@@ -41,6 +42,12 @@
     //Alert
     "saveAlert": "Veriler Kaydedildi.",
     "sendAlert": "Veriler Gönderildi.",
-    "refreshAlert": "Veriler Gönderildi. Sayfayı Yenileyin."
+    "refreshAlert": "Veriler Gönderildi. Sayfayı Yenileyin.",
+    //Password Wrong
+    "passwordWarning": "Hatalı kullanıcı adı veya şifre girdiniz. Lütfen tekrar deneyiniz.",
+    //Copy
+    "copy": "Kopyalandı",
+    //License
+    "license": "Lisans Denetimi Yapılıyor"
   }
 }

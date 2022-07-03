@@ -1,8 +1,6 @@
 // Import React
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 // Import core components
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {Button, Center} from 'native-base';
 
 import {useNavigation} from '@react-navigation/native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';

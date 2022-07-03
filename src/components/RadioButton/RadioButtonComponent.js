@@ -1,55 +1,35 @@
 import 'react-native-gesture-handler';
-import React, {useState,useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Dimensions,
-  Image,
-  Alert,
-} from 'react-native';
-import {
-  NativeBaseProvider,
-  Radio,
-  HStack,
-  Heading,
-  Box,
-  VStack,
-} from 'native-base';
+import React, {useState, useEffect} from 'react';
+import {NativeBaseProvider, HStack, Heading, Box, VStack} from 'native-base';
 import RadioGroup from 'react-native-radio-buttons-group';
-import { background } from 'native-base/lib/typescript/theme/styled-system';
 
 const RadioButtonComponent = props => {
   const [value, setValue] = useState();
-  const [data,setData] = useState([])
+  const [data, setData] = useState([]);
   useEffect(() => {
-    setData([])
+    setData([]);
 
-    if(props.formData.radioButtonComponent != ''){
-      setData(props.formData.radioButtonComponent)
-    }else{
-      for(i = 2; i < Object.keys(props.options).length; i++) {
+    if (props.formData.radioButtonComponent != '') {
+      setData(props.formData.radioButtonComponent);
+    } else {
+      for (i = 2; i < Object.keys(props.options).length; i++) {
         const value = String(i);
-        setData(oldArray => [...oldArray, {
-          
-          id: props.options[value].name,
-          label: props.options[value].key,
-          value: props.options[value].key,
-  
-        }])
+        setData(oldArray => [
+          ...oldArray,
+          {
+            id: props.options[value].name,
+            label: props.options[value].key,
+            value: props.options[value].key,
+          },
+        ]);
       }
-
     }
-  
-
-
   }, []);
 
-
   function onPressRadioButton(radioButtonsArray) {
-    props.valueChange(radioButtonsArray)
+    props.valueChange(radioButtonsArray);
     setValue(radioButtonsArray);
-}
+  }
 
   return (
     <NativeBaseProvider>
@@ -59,18 +39,14 @@ const RadioButtonComponent = props => {
             <Heading fontSize="lg">RadioButton</Heading>
           </HStack>
 
-          <RadioGroup 
+          <RadioGroup
             containerStyle={{
-              alignItems:'flex-start',
-              justifyContent:'flex-start'}}
-            radioButtons={data} 
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+            }}
+            radioButtons={data}
             onPress={onPressRadioButton}
-
-        />
-
-    
-
-       
+          />
         </VStack>
       </Box>
     </NativeBaseProvider>

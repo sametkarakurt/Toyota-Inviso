@@ -1,11 +1,12 @@
-import * as React from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
+import {Context} from './src/store/context';
 import {SplashScreen} from './src/screens/SplashScreen';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SignInScreen} from './src/screens/Login/SignInScreen';
 import {AuthContext} from './src/screens/utily';
+import {useNetInfo} from '@react-native-community/netinfo';
 import HomeTabNavigator from './src/navigation/HomeTabNavigator';
 import FormScreen from './src/components/Form/Form';
 import ContextProvider from './src/store/context';
@@ -37,6 +38,8 @@ LogBox.ignoreLogs([
 const Stack = createStackNavigator();
 
 export default function App({navigation}) {
+  const netInfo = useNetInfo();
+  const context = useContext(Context);
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -78,8 +81,34 @@ export default function App({navigation}) {
 
   const authContext = React.useMemo(
     () => ({
+      //Authentication
       signIn: async data => {
-        dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+        //Has internet connection
+        if (
+          JSON.stringify(netInfo.isConnected) === 'false' ||
+          context.mod === true
+        ) {
+          const username = AsyncStorage.getItem('username');
+          const password = AsyncStorage.getItem('password');
+
+          if (data.username == username && data.password == password) {
+            dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+
+            data.setPassword(true);
+          } else {
+            data.setPassword(false);
+          }
+        } else {
+          //Has not internet connection
+          if (data.username == 'sau' && data.password == 'sau') {
+            AsyncStorage.setItem('username', data.username);
+            AsyncStorage.setItem('password', data.password);
+            dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+            data.setPassword(true);
+          } else {
+            data.setPassword(false);
+          }
+        }
       },
       signOut: () => dispatch({type: 'SIGN_OUT'}),
       signUp: async data => {
@@ -88,7 +117,7 @@ export default function App({navigation}) {
     }),
     [],
   );
-
+  //Route
   return (
     <ToastProvider>
       <AuthContext.Provider value={authContext}>
@@ -114,7 +143,7 @@ export default function App({navigation}) {
                 // User is signed in
                 <>
                   <Stack.Screen
-                    name="Formlar"
+                    name="Ana Sayfa"
                     component={HomeTabNavigator}
                     options={{headerShown: false, title: ''}}
                   />

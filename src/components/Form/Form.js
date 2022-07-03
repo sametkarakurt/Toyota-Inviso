@@ -1,23 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, SafeAreaView, Image, StyleSheet} from 'react-native';
-import RadioButtonComponent from '../RadioButton/RadioButtonComponent';
-import TextAreaComponent from '../TextArea/TextAreaComponent';
-import {
-  NativeBaseProvider,
-  Center,
-  ScrollView,
-  Button,
-  Box,
-  FlatList,
-} from 'native-base';
-import {VLCPlayer, VlCPlayerView} from 'react-native-vlc-media-player';
-
+import React, {useState, useContext, useEffect} from 'react';
+import {SafeAreaView, Image, StyleSheet} from 'react-native';
+import {NativeBaseProvider, Center, Box, FlatList} from 'native-base';
 import uuid from 'react-native-uuid';
-
 import Location from '../Location/Location';
 import DynamicComponent from '../DynamicComponent/DynamicComponent';
-import data from '/Users/sametkarakurt/myProject/db.json';
+import data from '../../../db.json';
 import {LogBox} from 'react-native';
+import {Context} from '../../store/context';
 LogBox.ignoreLogs([
   'new NativeEventEmitter',
   'Non-serializable values were found in the navigation state',
@@ -25,15 +14,20 @@ LogBox.ignoreLogs([
 const FormScreen = ({route, navigation}) => {
   const {id, formName} = route.params;
   const formID = uuid.v4();
+  const context = useContext(Context);
 
+  //Date
   var date = new Date().getDate();
   var month = new Date().getMonth() + 1;
   var year = new Date().getFullYear();
 
   var currentDate = date + '/' + month + '/' + year;
 
+  //JSON
   const [formData, setFormData] = useState({
     id: formID,
+    username: context.username,
+    deviceId: context.deviceID,
     formName: formName,
     currentDate: currentDate,
     dateComponent: '',
@@ -53,6 +47,7 @@ const FormScreen = ({route, navigation}) => {
     location: '',
   });
 
+  //useState Functions
   const numberInputChange = text => {
     setFormData({...formData, numberComponent: text});
   };
@@ -134,6 +129,7 @@ const FormScreen = ({route, navigation}) => {
 
   const [typeArray, setTypeArray] = useState([]);
 
+  //Match Array
   const fields = [
     {value: 'Input Number', type: 'numberComponent', func: 'numberInputChange'},
     {value: 'Input Date', type: 'dateComponent', func: 'dateChange'},
@@ -162,6 +158,7 @@ const FormScreen = ({route, navigation}) => {
     {value: 'Signature', type: 'signatureComponent', func: 'signatureChange'},
   ];
 
+  //Parse JSON and Matching with array
   useEffect(() => {
     setTypeArray([]);
     const fetchData = async () => {
@@ -208,7 +205,7 @@ const FormScreen = ({route, navigation}) => {
 
   return (
     <NativeBaseProvider>
-      <SafeAreaView>
+      <SafeAreaView style={styles.safe}>
         <Center>
           <Box marginTop={5} minW="100%" maxW="100%" h="100%">
             <Location func={locationChange} />
@@ -253,5 +250,8 @@ const styles = StyleSheet.create({
   logo: {
     width: 66,
     height: 58,
+  },
+  safe: {
+    backgroundColor: '#E8EAED',
   },
 });

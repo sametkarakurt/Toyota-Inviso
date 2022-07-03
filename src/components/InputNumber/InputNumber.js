@@ -1,24 +1,20 @@
-import React,{useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  Checkbox,
   Heading,
   HStack,
   VStack,
-  Text,
   Box,
-  Center,
   NativeBaseProvider,
   Input,
 } from 'native-base';
 const InputNumber = props => {
-  const [formValue,setFormValue] = useState()
+  const [formValue, setFormValue] = useState();
 
   useEffect(() => {
-    if(props.formData.numberComponent){
-      setFormValue(props.formData.numberComponent)
+    if (props.formData.numberComponent) {
+      setFormValue(props.formData.numberComponent);
     }
   }, []);
-
 
   return (
     <NativeBaseProvider>
@@ -27,10 +23,17 @@ const InputNumber = props => {
           <HStack alignItems="baseline">
             <Heading fontSize="lg">Input Number</Heading>
           </HStack>
-          <Input value={formValue} placeholder={props.options[0].value}  key={props.key} onChangeText={text => {
-            setFormValue(text);
-            props.valueChange(text)}
-            } />
+          <Input
+            h="9"
+            backgroundColor={'white'}
+            value={formValue}
+            placeholder={props.options[0].value}
+            key={props.key}
+            onChangeText={text => {
+              setFormValue(text);
+              props.valueChange(text);
+            }}
+          />
         </VStack>
       </Box>
     </NativeBaseProvider>

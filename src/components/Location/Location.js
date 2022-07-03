@@ -1,16 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  PermissionsAndroid,
-  Platform,
-  Button,
-} from 'react-native';
-
+import {PermissionsAndroid, Platform} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 
 const Location = props => {
@@ -34,7 +23,6 @@ const Location = props => {
             },
           );
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            //To Check, If Permission is granted
             getOneTimeLocation();
             subscribeLocationLocation();
           } else {

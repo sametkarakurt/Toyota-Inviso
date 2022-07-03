@@ -1,9 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {Text, View} from 'react-native';
 import SelectBox from '../SelectBox/SelectBox';
-import {NativeBaseProvider, Center, ScrollView, Box} from 'native-base';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import styles from './styles';
+import {NativeBaseProvider, Center, Box} from 'native-base';
 import {Context} from '../../store/context';
 import {useTranslation} from 'react-i18next';
 const languageOptions = [

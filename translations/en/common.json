@@ -15,6 +15,7 @@
     "appSettings": "Picture and Application Settings",
     "uuid": "Device UUID",
     "exit": "Sign Out",
+    "welcome": "Welcome, ",
     //Ofline
     "barcode": "Barcode",
     "form": "Form",
@@ -41,6 +42,11 @@
     //Alert
     "saveAlert": "Data Saved.",
     "sendAlert": "Data Sent.",
-    "refreshAlert": "Data Sent. Refresh The Page."
+    "refreshAlert": "Data Sent. Refresh The Page.",
+    //Password Wrong
+    "passwordWarning": "Invalid credentials. Please try again.",
+    //Copy
+    "copy":"Copied",
+    "license": "Authorizing Your License"
   }
 }

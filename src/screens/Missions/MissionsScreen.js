@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {View, SafeAreaView} from 'react-native';
+import {View, SafeAreaView, StyleSheet} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNetInfo} from '@react-native-community/netinfo';
 import {Context} from '../../store/context';
@@ -12,11 +12,18 @@ const MissionsScreen = ({route}) => {
   const {t, i18n} = useTranslation();
   return (
     <NativeBaseProvider>
-      <SafeAreaView>
-        <Box marginTop={10} marginX={10}>
+      <SafeAreaView style={styles.container}>
+        <Box>
           {(JSON.stringify(netInfo.isConnected) === 'false' ||
             context.mod === true) && <InternetConnection />}
-          <HStack>
+          <HStack
+            marginTop={
+              JSON.stringify(netInfo.isConnected) === 'false' ||
+              context.mod === true
+                ? 3
+                : 10
+            }
+            marginLeft={5}>
             <FontAwesome color={'red'} name="exclamation" size={20} />
             <Text marginLeft={3}>{t('taskWarning')}</Text>
           </HStack>
@@ -27,3 +34,9 @@ const MissionsScreen = ({route}) => {
 };
 
 export default MissionsScreen;
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#E8EAED',
+    flex: 1,
+  },
+});
