@@ -31,7 +31,7 @@ export function SignInScreen() {
   const {t, i18n} = useTranslation();
 
   function handleSubmit() {
-    signIn({username, password, setPassword});
+    signIn({username, password, setPasswordWrong});
     //Save username
     context.changeUsername(username);
   }

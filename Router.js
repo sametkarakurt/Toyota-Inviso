@@ -94,9 +94,9 @@ export default function App({navigation}) {
           if (data.username == username && data.password == password) {
             dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
 
-            data.setPassword(true);
+            data.setPasswordWrong(false);
           } else {
-            data.setPassword(false);
+            data.setPasswordWrong(true);
           }
         } else {
           //Has not internet connection
@@ -104,9 +104,9 @@ export default function App({navigation}) {
             AsyncStorage.setItem('username', data.username);
             AsyncStorage.setItem('password', data.password);
             dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
-            data.setPassword(true);
+            data.setPasswordWrong(false);
           } else {
-            data.setPassword(false);
+            data.setPasswordWrong(true);
           }
         }
       },
